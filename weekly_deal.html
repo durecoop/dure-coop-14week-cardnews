@@ -25,11 +25,13 @@
     display:flex;width:100%;height:100%;
     transition:transform 0.35s cubic-bezier(0.22,0.68,0,1);
     will-change:transform;
+    touch-action:pan-y;
   }
   .slide{
     flex-shrink:0;width:100vw;max-width:480px;height:100%;
     overflow-y:auto;-webkit-overflow-scrolling:touch;
     position:relative;
+    touch-action:pan-y;
   }
 
   /* ===== PAGE INDICATOR ===== */
