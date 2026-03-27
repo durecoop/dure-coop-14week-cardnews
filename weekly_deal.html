@@ -622,25 +622,34 @@ var products = [
     setTimeout(function(){animating=false;},360);
   }
 
+  var startY=0, isHSwipe=null;
   track.addEventListener('touchstart',function(e){
     if(animating)return;
-    startX=e.touches[0].clientX; dx=0; dragging=true;
+    startX=e.touches[0].clientX; startY=e.touches[0].clientY;
+    dx=0; dragging=true; isHSwipe=null;
     track.style.transition='none';
   },{passive:true});
 
   track.addEventListener('touchmove',function(e){
     if(!dragging||animating)return;
     dx = e.touches[0].clientX - startX;
-    var off = -cur * track.parentElement.offsetWidth + dx;
-    if((cur===0&&dx>0)||(cur===total-1&&dx<0)) off = -cur*track.parentElement.offsetWidth + dx*0.3;
-    track.style.transform = 'translateX('+off+'px)';
-  },{passive:true});
+    var dy = e.touches[0].clientY - startY;
+    if(isHSwipe===null && (Math.abs(dx)>8 || Math.abs(dy)>8)){
+      isHSwipe = Math.abs(dx) > Math.abs(dy);
+    }
+    if(isHSwipe){
+      e.preventDefault();
+      var off = -cur * track.parentElement.offsetWidth + dx;
+      if((cur===0&&dx>0)||(cur===total-1&&dx<0)) off = -cur*track.parentElement.offsetWidth + dx*0.3;
+      track.style.transform = 'translateX('+off+'px)';
+    }
+  },{passive:false});
 
   track.addEventListener('touchend',function(){
     if(!dragging)return; dragging=false;
-    if(Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1);
+    if(isHSwipe && Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1);
     else goTo(cur);
-    dx=0;
+    dx=0; isHSwipe=null;
   });
 
   // Mouse
