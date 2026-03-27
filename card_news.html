@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>두레생협 14주 이주의기획</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ===== VERTICAL SWIPER ===== */
+  .swiper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .swiper-track {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.22, 0.68, 0, 1);
+    will-change: transform;
+  }
+
+  /* ===== FULL VIEWPORT CARD ===== */
+  .card {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    -webkit-user-select: none;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  /* ===== SIDE DOTS (RIGHT) ===== */
+  .dots {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+    padding: 8px 5px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .dots .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    transition: all 0.3s;
+  }
+  .dots .dot.active {
+    background: #fff;
+    height: 18px;
+    border-radius: 3px;
+  }
+
+  /* ===== PAGE COUNTER ===== */
+  .page-num {
+    position: absolute;
+    top: max(12px, env(safe-area-inset-top));
+    left: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    z-index: 10;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* ===== CTA BOTTOM BAR ===== */
+  .cta-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 20px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    background: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    color: #2d8c3c;
+    text-decoration: none;
+    flex-shrink: 0;
+    border-top: 1px solid #eee;
+  }
+  .cta-bottom .arrow {
+    font-size: 20px;
+    transition: transform 0.2s;
+  }
+  .card:active .cta-bottom .arrow { transform: translateX(4px); }
+
+  /* ===== 1. COVER ===== */
+  .cover {
+    background: linear-gradient(160deg, #145a24 0%, #2d8c3c 45%, #4caf50 100%);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 28px;
+    padding-top: env(safe-area-inset-top);
+  }
+  .cover .week-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 24px;
+    margin-bottom: 10px;
+  }
+  .cover .date-label {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-bottom: 28px;
+  }
+  .cover .main-title {
+    font-size: clamp(36px, 10vw, 48px);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.15);
+    letter-spacing: -1.5px;
+  }
+  .cover .emotion {
+    font-size: clamp(16px, 4.2vw, 20px);
+    font-weight: 400;
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    word-break: keep-all;
+  }
+  .cover .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .cover .tags span {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 7px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .cover .logo {
+    margin-top: 36px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    opacity: 0.45;
+  }
+  .cover .swipe-hint {
+    position: absolute;
+    bottom: max(28px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    animation: bounce 2s infinite;
+  }
+  .swipe-hint .hint-arrow {
+    font-size: 18px;
+  }
+  @keyframes bounce {
+    0%,100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.7; transform: translateX(-50%) translateY(-6px); }
+  }
+
+  /* ===== 2. PRODUCT CARD ===== */
+  .prod { background: #fff; }
+  .prod .prod-img {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .prod .prod-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .prod .discount-badge {
+    position: absolute;
+    top: max(14px, env(safe-area-inset-top));
+    left: 14px;
+    background: #e53935;
+    color: #fff;
+    font-size: clamp(24px, 7vw, 32px);
+    font-weight: 900;
+    padding: 10px 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(229,57,53,0.45);
+    line-height: 1;
+  }
+  .prod .tag-badge {
+    position: absolute;
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    background: #2d8c3c;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 10px;
+  }
+  .prod .prod-info {
+    flex-shrink: 0;
+    padding: 20px 24px 6px;
+  }
+  .prod .emotion-copy {
+    font-size: clamp(15px, 4vw, 18px);
+    color: #2d8c3c;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .prod .prod-name {
+    font-size: clamp(28px, 8vw, 38px);
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .prod .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .prod .price-old {
+    font-size: 17px;
+    color: #ccc;
+    text-decoration: line-through;
+  }
+  .prod .price-now {
+    font-size: clamp(32px, 9vw, 42px);
+    font-weight: 900;
+    color: #e53935;
+    letter-spacing: -1px;
+  }
+  .prod .price-won {
+    font-size: 20px;
+    font-weight: 800;
+    color: #e53935;
+  }
+  .prod .prod-detail {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* ===== 3. REVIEW CARD ===== */
+  .review { background: #fff; }
+  .review .review-top {
+    padding: 24px 24px 16px;
+    padding-top: max(24px, calc(env(safe-area-inset-top) + 10px));
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .review .review-top .r-label {
+    font-size: 15px;
+    color: #2d8c3c;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .review .review-top h2 {
+    font-size: clamp(26px, 7vw, 34px);
+    font-weight: 900;
+    color: #111;
+    line-height: 1.3;
+    letter-spacing: -1px;
+  }
+  .review .review-top .stars {
+    font-size: 34px;
+    letter-spacing: 4px;
+    color: #ff9800;
+    margin-top: 8px;
+  }
+  .review .review-top .r-count {
+    font-size: 14px;
+    color: #bbb;
+    margin-top: 4px;
+  }
+  .review .r-list {
+    flex: 1;
+    padding: 6px 18px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    min-height: 0;
+  }
+  .review .r-item {
+    background: #f6faf6;
+    border-radius: 14px;
+    padding: 16px 18px;
+    border-left: 4px solid #4caf50;
+    flex-shrink: 0;
+  }
+  .review .r-item .r-text {
+    font-size: clamp(15px, 4vw, 17px);
+    color: #222;
+    line-height: 1.6;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+  .review .r-item .r-meta {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #bbb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .review .r-item .r-tag {
+    background: #e8f5e9;
+    color: #2d8c3c;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  /* ===== 4. TRUST CARD ===== */
+  .trust { background: linear-gradient(180deg, #fefaf3 0%, #fff 50%); }
+  .trust .trust-top {
+    padding: 28px 24px 14px;
+    padding-top: max(28px, calc(env(safe-area-inset-top) + 12px));
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .trust .trust-top .t-label {
+    font-size: 15px;
+    color: #e65100;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .trust .trust-top h2 {
+    font-size: clamp(24px, 6.5vw, 32px);
+    font-weight: 900;
+    color: #111;
+    line-height: 1.35;
+    letter-spacing: -1px;
+  }
+  .trust .t-list {
+    flex: 1;
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+  }
+  .trust .t-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .trust .t-item .t-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    width: 44px;
+    text-align: center;
+    line-height: 1;
+  }
+  .trust .t-item .t-title {
+    font-size: clamp(16px, 4.2vw, 18px);
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 4px;
+  }
+  .trust .t-item .t-desc {
+    font-size: clamp(13px, 3.4vw, 15px);
+    color: #888;
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+
+  /* ===== VIDEO CARD ===== */
+  .video-card { background: #111; color: #fff; }
+  .video-card .vid-thumb {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    cursor: pointer;
+  }
+  .video-card .vid-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-card .play-btn {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(255,0,0,0.85);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+  }
+  .video-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
+  .play-btn::after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 16px 0 16px 28px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 4px;
+  }
+  .video-card .vid-bottom {
+    padding: 24px 24px;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+    text-align: center;
+    flex-shrink: 0;
+    background: #111;
+  }
+  .video-card .vid-ask {
+    font-size: clamp(28px, 7.5vw, 36px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: -1px;
+  }
+
+  /* ===== BANCHAN CARD ===== */
+  .banchan { background: #fff; }
+  .banchan .banchan-top {
+    padding: 24px 24px 12px;
+    padding-top: max(24px, calc(env(safe-area-inset-top) + 10px));
+    text-align: center;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    color: #fff;
+  }
+  .banchan .banchan-top .b-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+  }
+  .banchan .banchan-top h2 {
+    font-size: clamp(26px, 7vw, 34px);
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -1px;
+  }
+  .banchan .banchan-top .b-sub {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 6px;
+  }
+  .banchan .b-thumbs {
+    display: flex;
+    gap: 2px;
+    padding: 12px 18px 0;
+    flex-shrink: 0;
+  }
+  .banchan .b-thumbs img {
+    flex: 1;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .banchan .b-list {
+    flex: 1;
+    padding: 10px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    min-height: 0;
+  }
+  .banchan .b-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: #f9f5ff;
+    border-radius: 14px;
+    border-left: 4px solid #7b1fa2;
+  }
+  .banchan .b-item .b-name {
+    font-size: clamp(15px, 4vw, 17px);
+    font-weight: 700;
+    color: #222;
+  }
+  .banchan .b-item .b-weight {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+  .banchan .b-item .b-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .banchan .b-item .b-dc {
+    display: inline-block;
+    background: #ede7f6;
+    color: #6a1b9a;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 2px 10px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+  }
+  .banchan .b-item .b-price {
+    font-size: clamp(17px, 4.5vw, 20px);
+    font-weight: 900;
+    color: #6a1b9a;
+  }
+  .banchan .b-item .b-old {
+    font-size: 11px;
+    color: #ccc;
+    text-decoration: line-through;
+  }
+
+  /* ===== 5. MULTI CARD ===== */
+  .multi { background: #fff; }
+  .multi .multi-top {
+    background: linear-gradient(135deg, #e65100, #ff8f00);
+    color: #fff;
+    padding: 24px 24px;
+    padding-top: max(24px, calc(env(safe-area-inset-top) + 10px));
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .multi .multi-top .m-label {
+    font-size: clamp(15px, 4vw, 17px);
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  .multi .multi-top h2 {
+    font-size: clamp(30px, 8vw, 38px);
+    font-weight: 900;
+    margin-top: 4px;
+    letter-spacing: -1px;
+  }
+  .multi .m-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #eee;
+    min-height: 0;
+  }
+  .multi .m-item {
+    background: #fff;
+    padding: 16px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .multi .m-item img {
+    width: clamp(64px, 18vw, 88px);
+    height: clamp(64px, 18vw, 88px);
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .multi .m-item .mi-name {
+    font-size: clamp(14px, 3.8vw, 16px);
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 2px;
+  }
+  .multi .m-item .mi-wt {
+    font-size: 11px;
+    color: #ccc;
+    margin-bottom: 6px;
+  }
+  .multi .m-item .mi-dc {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    font-size: clamp(14px, 4vw, 17px);
+    font-weight: 900;
+    padding: 3px 12px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .multi .m-item .mi-price {
+    font-size: clamp(18px, 5vw, 22px);
+    font-weight: 900;
+    color: #e65100;
+  }
+  .multi .m-item .mi-old {
+    font-size: 11px;
+    color: #ccc;
+    text-decoration: line-through;
+  }
+
+  /* ===== 6. CTA FINAL ===== */
+  .final {
+    background: linear-gradient(160deg, #145a24 0%, #2d8c3c 50%, #1b5e20 100%);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 28px;
+  }
+  .final .f-emoji { font-size: 56px; margin-bottom: 24px; }
+  .final h2 {
+    font-size: clamp(28px, 7.5vw, 36px);
+    font-weight: 900;
+    line-height: 1.35;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+  }
+  .final .f-desc {
+    font-size: clamp(16px, 4.2vw, 19px);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    word-break: keep-all;
+  }
+  .final .f-btn {
+    display: inline-block;
+    background: #fff;
+    color: #2d8c3c;
+    font-size: clamp(18px, 5vw, 22px);
+    font-weight: 900;
+    padding: 18px 48px;
+    border-radius: 36px;
+    text-decoration: none;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  }
+  .final .f-sub {
+    margin-top: 14px;
+    font-size: 13px;
+    opacity: 0.45;
+  }
+  .final .f-footer {
+    position: absolute;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    font-size: 12px;
+    opacity: 0.35;
+    letter-spacing: 1px;
+  }
+
+  @media print {
+    body { overflow: visible; background: #fff; }
+    .swiper-track { flex-direction: column; transform: none !important; }
+    .card { height: auto; min-height: 100vh; break-after: page; }
+    .dots { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="swiper" id="swiper">
+  <div class="swiper-track" id="track">
+
+    <!-- 1. COVER -->
+    <div class="card cover">
+      <div class="page-num">1 / 13</div>
+      <div class="week-badge">2026년 14주차</div>
+      <div class="date-label">3.30(월) ~ 4.3(금) 배송</div>
+      <div class="main-title">이번 주,<br>우리 밥상을<br>채워드립니다</div>
+      <div class="emotion">생산자의 정성이 담긴 먹거리<br>조합원만을 위한 특별한 한 주</div>
+      <div class="tags">
+        <span>대저토마토</span>
+        <span>별빛사과</span>
+        <span>토막닭</span>
+        <span>양념소스</span>
+        <span>콜드브루</span>
+      </div>
+      <div class="logo">DURE COOP</div>
+      <div class="swipe-hint">
+        <span class="hint-arrow">&#8595;</span>
+        위로 밀어서 넘기기
+      </div>
+    </div>
+
+    <!-- 2. 대저토마토 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">2 / 13</div>
+      <div class="prod-img">
+        <img src="images/clean/daejeo_tomato_800.jpg" alt="대저토마토">
+        <div class="discount-badge">11%</div>
+        <div class="tag-badge">무농약</div>
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">봄바람과 함께 찾아온 부산의 선물</div>
+        <div class="prod-name">아삭아삭<br>대저토마토</div>
+        <div class="price-row">
+          <span class="price-old">13,200원</span>
+          <span class="price-now">11,850</span>
+          <span class="price-won">원~</span>
+        </div>
+        <div class="prod-detail">800g 무농약 | 2.5kg 34,900원</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 3. 대저토마토 리뷰 -->
+    <a class="card review" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">3 / 13</div>
+      <div class="review-top">
+        <div class="r-label">대저토마토</div>
+        <h2>먹어본 조합원이<br>먼저 알아봤어요</h2>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <div class="r-count">조합원 8명의 진심 후기</div>
+      </div>
+      <div class="r-list">
+        <div class="r-item">
+          <div class="r-text">"봄이 온 것 같이 상큼한 맛. 야채랑 올리브오일 뿌려 먹었더니 아주 맛나요"</div>
+          <div class="r-meta"><span>이정은 | 서울남부생협</span><span class="r-tag">추천해요</span></div>
+        </div>
+        <div class="r-item">
+          <div class="r-text">"생협 대저토마토는 레전드입니다. 매년 기다려져요! 진한 풍미가 최고"</div>
+          <div class="r-meta"><span>류지하 | 서울남부생협</span><span class="r-tag">추천해요</span></div>
+        </div>
+        <div class="r-item">
+          <div class="r-text">"대저 나올 때면 매주 시켜 먹고 있어요. 두부 마요네즈랑 먹으면 색다르게 맛있습니다"</div>
+          <div class="r-meta"><span>한나 | 성동생협</span><span class="r-tag">추천해요</span></div>
+        </div>
+        <div class="r-item">
+          <div class="r-text">"싱싱하고 맛도 넘 좋아서 먹으면서 기분이 좋아져요"</div>
+          <div class="r-meta"><span>정은미 | 경기남부생협</span><span class="r-tag">추천해요</span></div>
+        </div>
+      </div>
+      <div class="cta-bottom" style="color:#e53935;">나도 이 맛 경험하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 4. 별빛사과 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">4 / 13</div>
+      <div class="prod-img">
+        <img src="images/clean/starlight_apple.jpg" alt="별빛사과">
+        <div class="tag-badge">기획</div>
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">영천 별빛 아래, 부부의 손길로 키운</div>
+        <div class="prod-name">별빛사과</div>
+        <div class="price-row">
+          <span class="price-now">14,500</span>
+          <span class="price-won">원</span>
+        </div>
+        <div class="prod-detail">1.5kg 부사 | 호르몬제 착색제 불사용</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 5. 별빛사과 신뢰 -->
+    <a class="card trust" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">5 / 13</div>
+      <div class="trust-top">
+        <div class="t-label">왜 별빛사과일까요?</div>
+        <h2>얼굴 있는 먹거리,<br>그래서 더 안심입니다</h2>
+      </div>
+      <div class="t-list">
+        <div class="t-item">
+          <div class="t-icon">&#127822;</div>
+          <div>
+            <div class="t-title">호르몬제 &#183; 착색제 Zero</div>
+            <div class="t-desc">자연이 익힌 그대로, 아이 간식으로도 안심</div>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-icon">&#10052;&#65039;</div>
+          <div>
+            <div class="t-title">저온 CA저장, 갓 딴 식감</div>
+            <div class="t-desc">봄에도 가을 사과의 아삭한 풍미 그대로</div>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-icon">&#129309;</div>
+          <div>
+            <div class="t-title">조광현 생산자 부부 직접 재배</div>
+            <div class="t-desc">경북 영천에서 두레와 함께하는 믿음의 관계</div>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-icon">&#128153;</div>
+          <div>
+            <div class="t-title">생산자를 지키는 합리적 가격</div>
+            <div class="t-desc">좋은 먹거리의 제 값을 함께 만들어갑니다</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-bottom">별빛사과 만나러 가기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 6. 푸짐한 토막닭 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">6 / 13</div>
+      <div class="prod-img">
+        <img src="images/clean/chicken.jpg" alt="푸짐한 토막닭">
+        <div class="discount-badge">20%</div>
+        <div class="tag-badge">기획</div>
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">오늘 저녁, 온 가족이 함께하는 한 냄비</div>
+        <div class="prod-name">푸짐한 토막닭</div>
+        <div class="price-row">
+          <span class="price-old">12,500원</span>
+          <span class="price-now">10,000</span>
+          <span class="price-won">원</span>
+        </div>
+        <div class="prod-detail">1.4kg 13호 | 무항생제 | 닭볶음탕에 딱!</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 7. 양념소스 4종 -->
+    <a class="card multi" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">7 / 13</div>
+      <div class="multi-top">
+        <div class="m-label">첨가물 없이, 우리 재료로 정직하게</div>
+        <h2>양념소스 4종</h2>
+      </div>
+      <div class="m-grid">
+        <div class="m-item">
+          <img src="images/clean/sauce_mapo.jpg" alt="마파두부소스">
+          <div class="mi-name">마파두부소스</div>
+          <div class="mi-wt">150g</div>
+          <div class="mi-dc">7%</div>
+          <div class="mi-old">4,400원</div>
+          <div class="mi-price">4,000원</div>
+        </div>
+        <div class="m-item">
+          <img src="images/clean/sauce2.jpg" alt="떡볶이 양념소스">
+          <div class="mi-name">떡볶이 양념소스</div>
+          <div class="mi-wt">110g</div>
+          <div class="mi-dc">10%</div>
+          <div class="mi-old">2,900원</div>
+          <div class="mi-price">2,600원</div>
+        </div>
+        <div class="m-item">
+          <img src="images/clean/sauce1.jpg" alt="닭볶음탕 양념소스">
+          <div class="mi-name">닭볶음탕 양념소스</div>
+          <div class="mi-wt">200g</div>
+          <div class="mi-dc">10%</div>
+          <div class="mi-old">4,900원</div>
+          <div class="mi-price">4,400원</div>
+        </div>
+        <div class="m-item">
+          <img src="images/clean/sauce3.jpg" alt="생선조림 양념소스">
+          <div class="mi-name">생선조림 양념소스</div>
+          <div class="mi-wt">100g</div>
+          <div class="mi-dc">10%</div>
+          <div class="mi-old">2,900원</div>
+          <div class="mi-price">2,600원</div>
+        </div>
+      </div>
+      <div class="cta-bottom">국산 재료의 안심 한 끼 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 9. 대용량 반찬 한정 공급 -->
+    <a class="card banchan" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">8 / 13</div>
+      <div class="banchan-top">
+        <div class="b-badge">4/1(화) ~ 4/3(목) 한정</div>
+        <h2>대용량 반찬<br>한정 공급</h2>
+        <div class="b-sub">넉넉하게 준비하는 우리 집 밑반찬</div>
+      </div>
+      <div class="b-thumbs">
+        <img src="images/clean/banchan_ggomak.jpg" alt="꼬막양념무침">
+        <img src="images/clean/banchan_sesame.jpg" alt="생깻잎무침">
+        <img src="images/clean/banchan_dallae.jpg" alt="달래무침">
+        <img src="images/clean/banchan_bomdong.jpg" alt="봄동나물">
+      </div>
+      <div class="b-list">
+        <div class="b-item">
+          <div>
+            <div class="b-name">깻잎순 들깨볶음</div>
+            <div class="b-weight">200g 대용량</div>
+          </div>
+          <div class="b-right">
+            <div class="b-dc">7%</div>
+            <div class="b-old">12,600원</div>
+            <div class="b-price">11,700원</div>
+          </div>
+        </div>
+        <div class="b-item">
+          <div>
+            <div class="b-name">도라지 초무침</div>
+            <div class="b-weight">220g 대용량</div>
+          </div>
+          <div class="b-right">
+            <div class="b-dc">7%</div>
+            <div class="b-old">11,800원</div>
+            <div class="b-price">11,000원</div>
+          </div>
+        </div>
+        <div class="b-item">
+          <div>
+            <div class="b-name">생깻잎 무침</div>
+            <div class="b-weight">240g 대용량</div>
+          </div>
+          <div class="b-right">
+            <div class="b-dc">10%</div>
+            <div class="b-old">12,200원</div>
+            <div class="b-price">11,000원</div>
+          </div>
+        </div>
+        <div class="b-item">
+          <div>
+            <div class="b-name">우엉조림</div>
+            <div class="b-weight">200g 대용량</div>
+          </div>
+          <div class="b-right">
+            <div class="b-dc">7%</div>
+            <div class="b-old">10,400원</div>
+            <div class="b-price">9,700원</div>
+          </div>
+        </div>
+        <div class="b-item">
+          <div>
+            <div class="b-name">오미자 무생채</div>
+            <div class="b-weight">대용량</div>
+          </div>
+          <div class="b-right">
+            <div class="b-dc">5%</div>
+            <div class="b-old">8,700원</div>
+            <div class="b-price">8,300원</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-bottom" style="color:#6a1b9a;">맛찬 반찬 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 10. 디카페인 콜드브루 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">9 / 13</div>
+      <div class="prod-img">
+        <img src="images/clean/coldbrew.jpg" alt="디카페인 콜드브루">
+        <div class="discount-badge">10%</div>
+        <div class="tag-badge">신규</div>
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">청년의 자립을 응원하는 한 잔의 커피</div>
+        <div class="prod-name">디카페인<br>콜드브루</div>
+        <div class="price-row">
+          <span class="price-old">16,500원</span>
+          <span class="price-now">14,800</span>
+          <span class="price-won">원</span>
+        </div>
+        <div class="prod-detail">500ml | 성미산좋은날협동조합 | 콜롬비아 원두</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 10. 손질갑오징어 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">10 / 13</div>
+      <div class="prod-img">
+        <img src="images/clean/squid.jpg" alt="손질갑오징어">
+        <div class="discount-badge">24%</div>
+        <div class="tag-badge">할인</div>
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">누적 11,000개 판매, 손질 없이 바로 요리</div>
+        <div class="prod-name">손질 갑오징어</div>
+        <div class="price-row">
+          <span class="price-old">17,930원</span>
+          <span class="price-now">12,400</span>
+          <span class="price-won">원</span>
+        </div>
+        <div class="prod-detail">500g 국내산 | 볶음, 튀김, 찌개에 만능</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 11. 다짐생선살 3종 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">11 / 13</div>
+      <div class="prod-img" style="background:#f5f5f5;">
+        <img src="images/fish_clean.jpg" alt="다짐생선살 3종" style="object-fit:contain;">
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">아이 이유식이 쉬워지는 한 팩</div>
+        <div class="prod-name">다짐 생선살 3종</div>
+        <div class="price-row">
+          <span class="price-now">10,700</span>
+          <span class="price-won">원~</span>
+        </div>
+        <div class="prod-detail">대구살 · 참돔살 · 광어살 120g | 신규 | 최대 11% 할인</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 12. 딸기생활재 -->
+    <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num">12 / 13</div>
+      <div class="prod-img" style="background:#fff5f5;">
+        <img src="images/strawberry.jpg" alt="딸기생활재" style="object-fit:contain;">
+      </div>
+      <div class="prod-info">
+        <div class="emotion-copy">성큼 다가온 봄에는 상큼 딸기</div>
+        <div class="prod-name">딸기 생활재 6종</div>
+        <div class="price-row">
+          <span class="price-now">1,250</span>
+          <span class="price-won">원~</span>
+        </div>
+        <div class="prod-detail">요구르트 · 주스 · 웨하스 · 콩포트 · 셰이크 | 최대 18% 할인</div>
+      </div>
+      <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
+    </a>
+
+    <!-- 13. CTA -->
+    <a class="card final" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
+      <div class="page-num" style="color:rgba(255,255,255,0.3)">13 / 13</div>
+      <div class="f-emoji">&#127793;</div>
+      <h2>밥상 위의 작은 변화가<br>세상을 바꿉니다</h2>
+      <div class="f-desc">생산자와 조합원이 함께 만드는<br>안전하고 정직한 먹거리,<br>이번 주도 두레생협이 함께합니다</div>
+      <span class="f-btn">이주의 기획전 바로가기</span>
+      <div class="f-sub">ecoop.or.kr</div>
+      <div class="f-footer">두레생협연합 | 1661-5110</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- SIDE DOTS -->
+<div class="dots" id="dots">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<script>
+(function() {
+  var track = document.getElementById('track');
+  var dots = document.querySelectorAll('.dot');
+  var total = 13;
+  var current = 0;
+  var startY = 0, diffY = 0, dragging = false, isVertical = null;
+  var animating = false;
+
+  function goTo(i) {
+    if (animating) return;
+    current = Math.max(0, Math.min(total - 1, i));
+    track.style.transition = 'transform 0.4s cubic-bezier(0.22,0.68,0,1)';
+    track.style.transform = 'translateY(' + (-current * 100) + 'dvh)';
+    dots.forEach(function(d, idx) { d.classList.toggle('active', idx === current); });
+    animating = true;
+    setTimeout(function() { animating = false; }, 420);
+  }
+
+  // Touch events
+  track.addEventListener('touchstart', function(e) {
+    if (animating) return;
+    startY = e.touches[0].clientY;
+    diffY = 0;
+    dragging = true;
+    isVertical = null;
+    track.style.transition = 'none';
+  }, { passive: true });
+
+  track.addEventListener('touchmove', function(e) {
+    if (!dragging || animating) return;
+    var dy = e.touches[0].clientY - startY;
+    var dx = e.touches[0].clientX - (e.touches[0].clientX); // just for direction check
+
+    if (isVertical === null) {
+      var absDy = Math.abs(e.touches[0].clientY - startY);
+      var absDx = Math.abs(e.touches[0].clientX - startY); // approximate
+      if (absDy > 8) {
+        isVertical = true;
+      } else if (absDx > 8) {
+        isVertical = false;
+        return;
+      }
+      return;
+    }
+    if (!isVertical) return;
+
+    e.preventDefault();
+    diffY = dy;
+    // Rubber-band at edges
+    var offset;
+    if ((current === 0 && diffY > 0) || (current === total - 1 && diffY < 0)) {
+      offset = -current * window.innerHeight + diffY * 0.3;
+    } else {
+      offset = -current * window.innerHeight + diffY;
+    }
+    track.style.transform = 'translateY(' + offset + 'px)';
+  }, { passive: false });
+
+  track.addEventListener('touchend', function() {
+    if (!dragging) return;
+    dragging = false;
+    if (isVertical && Math.abs(diffY) > 50) {
+      goTo(diffY < 0 ? current + 1 : current - 1);
+    } else {
+      goTo(current);
+    }
+    diffY = 0;
+  });
+
+  // Mouse wheel
+  var wheelTimer = null;
+  document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (animating) return;
+    if (wheelTimer) return;
+    wheelTimer = setTimeout(function() { wheelTimer = null; }, 500);
+    if (e.deltaY > 30) goTo(current + 1);
+    else if (e.deltaY < -30) goTo(current - 1);
+  }, { passive: false });
+
+  // Mouse drag
+  var mouseDown = false, mStartY = 0, mDiff = 0;
+  track.addEventListener('mousedown', function(e) {
+    if (animating) return;
+    mouseDown = true; mStartY = e.clientY; mDiff = 0;
+    track.style.transition = 'none';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!mouseDown) return;
+    mDiff = e.clientY - mStartY;
+    var offset = -current * window.innerHeight + mDiff;
+    track.style.transform = 'translateY(' + offset + 'px)';
+  });
+  document.addEventListener('mouseup', function() {
+    if (!mouseDown) return;
+    mouseDown = false;
+    if (Math.abs(mDiff) > 60) {
+      goTo(mDiff < 0 ? current + 1 : current - 1);
+    } else {
+      goTo(current);
+    }
+    mDiff = 0;
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  // Prevent link navigation on swipe/drag
+  track.querySelectorAll('a.card').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      if (Math.abs(diffY) > 10 || Math.abs(mDiff) > 10) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Dot click to navigate
+  dots.forEach(function(dot, idx) {
+    dot.addEventListener('click', function() { goTo(idx); });
+  });
+})();
+</script>
+
+</body>
+</html>
