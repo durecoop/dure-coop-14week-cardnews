@@ -614,11 +614,12 @@ var products = [
   var total = products.length + 1;
   var cur = 0, startX = 0, dx = 0, dragging = false, animating = false;
 
+  function slideW(){ return track.parentElement.offsetWidth; }
   function goTo(i){
     if(animating) return;
     cur = Math.max(0, Math.min(total-1, i));
     track.style.transition = 'transform 0.35s cubic-bezier(0.22,0.68,0,1)';
-    track.style.transform = 'translateX('+ (-cur*100) +'%)';
+    track.style.transform = 'translateX('+ (-cur * slideW()) +'px)';
     ind.textContent = (cur+1)+' / '+total;
     animating = true;
     setTimeout(function(){animating=false;},360);
@@ -641,8 +642,8 @@ var products = [
     }
     if(isHSwipe){
       e.preventDefault();
-      var off = -cur * track.parentElement.offsetWidth + dx;
-      if((cur===0&&dx>0)||(cur===total-1&&dx<0)) off = -cur*track.parentElement.offsetWidth + dx*0.3;
+      var off = -cur * slideW() + dx;
+      if((cur===0&&dx>0)||(cur===total-1&&dx<0)) off = -cur*slideW() + dx*0.3;
       track.style.transform = 'translateX('+off+'px)';
     }
   },{passive:false});
@@ -662,7 +663,7 @@ var products = [
   });
   document.addEventListener('mousemove',function(e){
     if(!mDown)return; mD=e.clientX-mX;
-    track.style.transform='translateX('+(-cur*track.parentElement.offsetWidth+mD)+'px)';
+    track.style.transform='translateX('+(-cur*slideW()+mD)+'px)';
   });
   document.addEventListener('mouseup',function(){
     if(!mDown)return; mDown=false;
