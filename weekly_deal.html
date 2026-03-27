@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>두레생협 금주 할인 생활재</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
+  :root {
+    --green:#1a7f37; --green-l:#e6f4ea;
+    --red:#e53935; --red-bg:#fff5f5;
+    --orange:#f57c00; --bg:#f5f5f5; --card:#fff; --text:#111;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    font-family:'Noto Sans KR',-apple-system,sans-serif;
+    height:100%;overflow:hidden;background:#000;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;-webkit-user-select:none;
+  }
+
+  /* ===== SWIPER ===== */
+  .swiper{width:100%;height:100%;position:relative;overflow:hidden;max-width:480px;margin:0 auto;}
+  .swiper-track{
+    display:flex;width:100%;height:100%;
+    transition:transform 0.35s cubic-bezier(0.22,0.68,0,1);
+    will-change:transform;
+  }
+  .slide{
+    flex-shrink:0;width:100vw;max-width:480px;height:100%;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    position:relative;
+  }
+
+  /* ===== PAGE INDICATOR ===== */
+  .page-ind{
+    position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);
+    z-index:100;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);
+    color:#fff;font-size:12px;font-weight:600;
+    padding:5px 14px;border-radius:12px;
+    pointer-events:none;max-width:480px;
+  }
+
+  /* ===== COVER SLIDE ===== */
+  .cover{
+    background:linear-gradient(160deg,#145a24 0%,#2d8c3c 45%,#4caf50 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;color:#fff;padding:0 28px;min-height:100%;
+  }
+  .cover .week-badge{
+    background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);
+    font-size:14px;font-weight:700;padding:8px 22px;border-radius:24px;margin-bottom:12px;
+  }
+  .cover h1{
+    font-size:clamp(30px,8.5vw,42px);font-weight:900;line-height:1.25;
+    letter-spacing:-1.5px;margin-bottom:14px;
+    text-shadow:0 3px 16px rgba(0,0,0,0.15);
+  }
+  .cover .sub{font-size:16px;opacity:0.85;line-height:1.6;margin-bottom:28px;word-break:keep-all;}
+  .cover .stat-row{display:flex;gap:28px;margin-bottom:32px;}
+  .cover .stat-num{font-size:26px;font-weight:900;}
+  .cover .stat-label{font-size:11px;opacity:0.6;margin-top:2px;}
+  .cover .trust-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;}
+  .cover .trust-pill{
+    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);
+    padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600;
+  }
+  .cover .swipe-hint{
+    position:absolute;bottom:max(28px,env(safe-area-inset-bottom));
+    font-size:13px;opacity:0.5;display:flex;align-items:center;gap:6px;
+  }
+
+  /* ===== FULL-SCREEN GUIDE OVERLAY ===== */
+  .guide-overlay{
+    position:fixed;inset:0;z-index:500;
+    background:rgba(0,0,0,0.7);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;text-align:center;
+    opacity:1;transition:opacity 0.6s;
+    pointer-events:auto;
+    max-width:480px;margin:0 auto;
+  }
+  .guide-overlay.hide{opacity:0;pointer-events:none;}
+  .guide-hand{
+    font-size:64px;
+    animation:guideSwipe 1.8s ease-in-out infinite;
+  }
+  .guide-text{
+    font-size:clamp(22px,6vw,28px);font-weight:900;
+    margin-top:16px;letter-spacing:-1px;line-height:1.4;
+  }
+  .guide-sub{
+    font-size:14px;opacity:0.6;margin-top:10px;
+  }
+  @keyframes guideSwipe{
+    0%{transform:translateX(40px);opacity:0.4;}
+    40%{transform:translateX(-40px);opacity:1;}
+    70%{transform:translateX(-40px);opacity:1;}
+    100%{transform:translateX(40px);opacity:0.4;}
+  }
+
+  /* ===== PRODUCT SLIDE ===== */
+  .prod-slide{background:var(--card);min-height:100%;display:flex;flex-direction:column;}
+  .prod-slide .img-area{
+    position:relative;width:100%;aspect-ratio:1;overflow:hidden;background:#f5f5f5;flex-shrink:0;
+  }
+  .prod-slide .img-area img{width:100%;height:100%;object-fit:cover;}
+  .prod-slide .dc-badge{
+    position:absolute;top:max(14px,env(safe-area-inset-top));left:14px;
+    background:var(--red);color:#fff;
+    font-size:clamp(22px,6vw,28px);font-weight:900;
+    padding:8px 16px;border-radius:12px;line-height:1;
+    box-shadow:0 4px 14px rgba(229,57,53,0.45);
+  }
+  .prod-slide .tag-area{
+    position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;
+    display:flex;gap:5px;
+  }
+  .prod-slide .tag{
+    background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);
+    color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;
+  }
+  .prod-slide .buying{
+    position:absolute;bottom:12px;left:14px;
+    background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);
+    color:#fff;font-size:12px;font-weight:600;
+    padding:6px 12px;border-radius:18px;
+    display:flex;align-items:center;gap:5px;
+  }
+  .dot-live{width:6px;height:6px;background:#4caf50;border-radius:50%;animation:pulse 1.5s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+  .week-only-badge{
+    position:absolute;bottom:12px;right:14px;
+    background:rgba(255,152,0,0.9);color:#fff;
+    font-size:11px;font-weight:800;padding:5px 10px;border-radius:8px;
+  }
+
+  /* info */
+  .prod-slide .info{padding:18px 20px 8px;flex:1;}
+  .prod-slide .feat{margin-bottom:10px;}
+  .prod-slide .feat-line{
+    font-size:14px;color:#555;line-height:1.55;word-break:keep-all;
+    padding-left:14px;position:relative;margin-bottom:3px;
+  }
+  .prod-slide .feat-line::before{
+    content:'';position:absolute;left:0;top:8px;
+    width:6px;height:6px;border-radius:50%;background:var(--green);
+  }
+  .prod-slide .pname{
+    font-size:clamp(22px,6vw,28px);font-weight:900;letter-spacing:-0.8px;
+    margin-bottom:10px;line-height:1.2;
+  }
+  .prod-slide .price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+  .prod-slide .p-old{font-size:15px;color:#ccc;text-decoration:line-through;}
+  .prod-slide .p-now{font-size:clamp(28px,8vw,36px);font-weight:900;color:var(--red);letter-spacing:-1px;}
+  .prod-slide .p-won{font-size:17px;font-weight:700;color:var(--red);}
+  .prod-slide .p-save{
+    display:inline-block;background:var(--red-bg);color:var(--red);
+    font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;
+  }
+  .prod-slide .p-detail{font-size:12px;color:#aaa;margin-top:4px;}
+
+  /* review */
+  .rv-box{
+    margin:12px 20px 0;padding:14px 16px;
+    background:#f9faf9;border-radius:14px;border-left:3px solid var(--green);
+  }
+  .rv-box .rv-q{font-size:14px;color:#333;line-height:1.55;word-break:keep-all;}
+  .rv-box .rv-meta{
+    margin-top:8px;font-size:11px;color:#bbb;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .rv-stars{color:#ff9800;letter-spacing:1px;}
+  .rv-more{
+    display:flex;align-items:center;justify-content:center;gap:4px;
+    margin:8px 20px 0;padding:10px;
+    background:#f0f7f1;border-radius:10px;
+    font-size:13px;font-weight:700;color:var(--green);
+    cursor:pointer;border:none;width:calc(100% - 40px);
+  }
+  .rv-more:active{background:#d8eeda;}
+
+  /* cta */
+  .prod-slide .cta-bottom{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom));
+    background:#fff;font-size:16px;font-weight:800;color:var(--green);
+    text-decoration:none;flex-shrink:0;border-top:1px solid #eee;margin-top:auto;
+  }
+
+  /* ===== BOTTOM SHEET ===== */
+  .sheet-overlay{
+    position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.45);
+    opacity:0;pointer-events:none;transition:opacity 0.25s;
+  }
+  .sheet-overlay.open{opacity:1;pointer-events:auto;}
+  .sheet{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
+    width:100%;max-width:480px;z-index:310;
+    background:#fff;border-radius:20px 20px 0 0;
+    max-height:85vh;overflow-y:auto;
+    transition:transform 0.35s cubic-bezier(0.22,0.68,0,1);
+    padding-bottom:max(20px,env(safe-area-inset-bottom));
+  }
+  .sheet.open{transform:translateX(-50%) translateY(0);}
+  .sheet-handle{display:flex;justify-content:center;padding:12px 0 6px;position:sticky;top:0;background:#fff;z-index:1;border-radius:20px 20px 0 0;}
+  .sheet-handle::before{content:'';width:36px;height:4px;background:#ddd;border-radius:2px;}
+  .sheet-hd{padding:8px 20px 16px;text-align:center;border-bottom:1px solid #f0f0f0;}
+  .sheet-hd .sh-name{font-size:18px;font-weight:900;}
+  .sheet-hd .sh-period{font-size:12px;color:#aaa;margin-top:4px;}
+  .sheet-hd .sh-rating{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;}
+  .sheet-hd .sh-score{font-size:28px;font-weight:900;color:var(--green);}
+  .sheet-hd .sh-stars{font-size:20px;color:#ff9800;letter-spacing:2px;}
+  .sheet-hd .sh-count{font-size:12px;color:#bbb;}
+  .ai-sum{margin:16px 20px;padding:14px 16px;background:linear-gradient(135deg,#f8f9ff,#f0f4ff);border:1px solid #e3e8f8;border-radius:14px;}
+  .ai-sum .ai-label{font-size:11px;font-weight:700;color:#5c6bc0;margin-bottom:6px;}
+  .ai-sum .ai-text{font-size:13px;color:#444;line-height:1.6;word-break:keep-all;}
+  .sheet-boxes{display:flex;gap:10px;padding:0 20px 14px;}
+  .sbox{flex:1;padding:14px;border-radius:14px;text-align:center;}
+  .sbox.pos{background:#f0fff4;border:1px solid #c8e6c9;}
+  .sbox.neg{background:#fff8f8;border:1px solid #ffcdd2;}
+  .sbox .sb-icon{font-size:22px;margin-bottom:4px;}
+  .sbox .sb-label{font-size:12px;font-weight:700;}
+  .sbox.pos .sb-label{color:var(--green);} .sbox.neg .sb-label{color:var(--red);}
+  .sbox .sb-count{font-size:11px;color:#aaa;}
+  .sheet-kw{padding:0 20px 14px;}
+  .sheet-kw .sk-title{font-size:13px;font-weight:700;margin-bottom:8px;color:#555;}
+  .sk-pills{display:flex;flex-wrap:wrap;gap:6px;}
+  .sk-pill{padding:6px 12px;border-radius:16px;font-size:12px;font-weight:600;}
+  .sk-pill.pos{background:#e8f5e9;color:#2e7d32;} .sk-pill.neg{background:#ffebee;color:#c62828;}
+  .sk-pill .sk-n{font-weight:800;margin-left:3px;}
+  .sheet-rvs{padding:0 20px 16px;}
+  .sr-sec{margin-bottom:14px;}
+  .sr-sec .sr-t{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .sr-sec .sr-t.pt{color:var(--green);} .sr-sec .sr-t.nt{color:var(--red);}
+  .sr-i{padding:12px 14px;border-radius:12px;margin-bottom:8px;font-size:13px;line-height:1.55;word-break:keep-all;}
+  .sr-i.pi{background:#f6faf6;border-left:3px solid #4caf50;color:#333;}
+  .sr-i.ni{background:#fef6f6;border-left:3px solid #ef5350;color:#333;}
+  .sr-i .sr-m{margin-top:6px;font-size:11px;color:#bbb;display:flex;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<!-- GUIDE OVERLAY -->
+<div class="guide-overlay" id="guideOverlay">
+  <div class="guide-hand">&#128072;</div>
+  <div class="guide-text">밀어서<br>생활재 보기</div>
+  <div class="guide-sub">좌우로 넘겨보세요</div>
+</div>
+
+<div class="page-ind" id="pageInd">1 / 52</div>
+
+<div class="swiper" id="swiper">
+  <div class="swiper-track" id="track">
+
+    <!-- COVER (slide 0) -->
+    <div class="slide">
+      <div class="cover">
+        <div class="week-badge">2026년 14주차</div>
+        <h1>두레온라인<br>금주 할인 생활재<br>모두 보기</h1>
+        <div class="sub">조합원만을 위한 특별한 가격<br>이번 주만 적용되는 할인입니다</div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-num">51</div><div class="stat-label">할인 품목</div></div>
+          <div class="stat"><div class="stat-num">25%</div><div class="stat-label">최대 할인</div></div>
+          <div class="stat"><div class="stat-num">700+</div><div class="stat-label">지금 주문 중</div></div>
+        </div>
+        <div class="trust-row">
+          <span class="trust-pill">&#9989; 무항생제</span>
+          <span class="trust-pill">&#127807; 무농약</span>
+          <span class="trust-pill">&#129309; 생산자 직거래</span>
+          <span class="trust-pill">&#128230; 신선 냉장 배송</span>
+        </div>
+        <div class="swipe-hint">밀어서 상품 보기 &#10132;</div>
+      </div>
+    </div>
+
+    <!-- PRODUCT SLIDES (generated by JS) -->
+
+  </div>
+</div>
+
+<!-- BOTTOM SHEET -->
+<div class="sheet-overlay" id="sheetOverlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-hd">
+    <div class="sh-name" id="shName">--</div>
+    <div class="sh-period">최근 1년간 조합원 리뷰 요약</div>
+    <div class="sh-rating">
+      <span class="sh-score" id="shScore">--</span>
+      <span><span class="sh-stars" id="shStars">--</span><br><span class="sh-count" id="shCount">--</span></span>
+    </div>
+  </div>
+  <div class="ai-sum"><div class="ai-label">&#9889; AI 요약</div><div class="ai-text" id="shAI">--</div></div>
+  <div class="sheet-boxes">
+    <div class="sbox pos"><div class="sb-icon">&#128077;</div><div class="sb-label">긍정 의견</div><div class="sb-count" id="shPosC">--</div></div>
+    <div class="sbox neg"><div class="sb-icon">&#128078;</div><div class="sb-label">아쉬운 점</div><div class="sb-count" id="shNegC">--</div></div>
+  </div>
+  <div class="sheet-kw"><div class="sk-title">자주 언급되는 키워드</div><div class="sk-pills" id="shKW"></div></div>
+  <div class="sheet-rvs" id="shRvs"></div>
+</div>
+
+<script>
+// ======== PRODUCT DATA (51 items) ========
+var IMG = 'https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/';
+var LINK = 'https://ecoop.or.kr/DureShop/recommend.do';
+
+var products = [
+  {name:'손질 갑오징어',sub:'500g / 국내 남해안산',img:IMG+'56862C.jpg',dc:24,old:'16,300',now:'12,400',save:'3,900',
+   f1:'뼈와 내장 깔끔하게 손질 완료, 꺼내서 바로 요리',f2:'누적 11,000개 판매! 볶음, 튀김, 찌개에 만능 활용',
+   tags:['국내산'],buying:115,
+   rv:{q:'"손질이 정말 깔끔! 바로 볶았는데 쫄깃쫄깃해요"',a:'이정은 | 성동',s:4},
+   rvData:{score:'4.6',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'87건',ai:'누적 11,000개 판매 인기 상품. "손질 깔끔, 바로 조리 가능"이 최대 장점.',posC:'74건(85%)',negC:'13건(15%)',kw:[{t:'손질 깔끔',n:42,p:1},{t:'쫄깃쫄깃',n:28,p:1},{t:'재구매',n:19,p:1},{t:'해동 시 물기',n:8,p:0},{t:'크기 편차',n:5,p:0}],pos:[{t:'"바로 볶았는데 쫄깃! 1만개 팔리는 이유가 있네요"',a:'이정은',d:'2026.02'},{t:'"퇴근 후 10분이면 저녁 완성"',a:'한나',d:'2025.12'}],neg:[{t:'"해동하면 물이 좀 많이 나와요"',a:'박지영',d:'2025.11'}]}},
+
+  {name:'현미국수',sub:'6입 / 유기농 현미',img:IMG+'20131C.jpg',dc:10,old:'12,600',now:'11,300',save:'1,300',
+   f1:'국산 유기농 현미로 만든 건강한 국수, 첨가물 최소화',f2:'쫄깃하면서 구수한 맛, 간장양념장에 비벼먹으면 별미',
+   tags:['유기농'],buying:60,
+   rv:{q:'"쫄깃하면서 구수해요. 간장 양념장에 비벼먹으면 별미!"',a:'송지현 | 성동',s:4},rvData:null},
+
+  {name:'돼지삼겹살',sub:'400g / 무항생제',img:IMG+'58371C.png',dc:10,old:'17,500',now:'15,700',save:'1,800',
+   f1:'무항생제 인증 돈육, 먹기 좋은 두께로 슬라이스',f2:'에어프라이어에 구워도, 김치찌개에 넣어도 맛있는',
+   tags:['무항생제'],buying:4,
+   rv:{q:'"마트 삼겹살이랑 확실히 달라요. 잡내 없고 고소해요"',a:'최윤서 | 서울남부',s:5},rvData:null},
+
+  {name:'별빛사과 (부사)',sub:'1.5kg / 영천산',img:IMG+'59370C.jpg',dc:0,old:'',now:'14,500',save:'',
+   f1:'경북 영천 별빛 아래 부부가 직접 키운 사과',f2:'호르몬제, 착색제 미사용. 자연이 익힌 아삭한 꿀사과',
+   tags:['영천산','무호르몬'],buying:32,
+   rv:{q:'"아이 간식으로 깎아주면 순삭! 아삭하고 달아요"',a:'정은미 | 경기남부',s:4},
+   rvData:{score:'4.6',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'28건',ai:'"아삭하고 달다"는 평가 지배적. 아이 간식용으로 특히 인기.',posC:'24건(86%)',negC:'4건(14%)',kw:[{t:'아삭한',n:16,p:1},{t:'아이 간식',n:11,p:1},{t:'달콤한',n:9,p:1},{t:'식감 물러짐',n:3,p:0}],pos:[{t:'"아이 간식으로 깎아주면 순삭이에요"',a:'정은미',d:'2026.02'},{t:'"껍질째 먹여도 안심"',a:'이수빈',d:'2025.12'}],neg:[{t:'"봄이라 한두 개 좀 푸석한 게 있었어요"',a:'박지영',d:'2025.03'}]}},
+
+  {name:'대저토마토',sub:'800g / 무농약',img:IMG+'17091C.jpg',dc:10,old:'13,200',now:'11,850',save:'1,350',
+   f1:'부산 대저의 봄바람이 키운 짭짤한 토마토, 무농약 인증',f2:'단단한 과육에 한 입 베어물면 봄이 입안 가득',
+   tags:['무농약','제철'],buying:36,
+   rv:{q:'"생협 대저토마토는 레전드. 매년 기다려져요!"',a:'류지하 | 서울남부',s:5},
+   rvData:{score:'4.8',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',count:'62건',ai:'"짭짤하면서 단맛 나는" 특유의 맛에 만족도 매우 높음.',posC:'56건(90%)',negC:'6건(10%)',kw:[{t:'짭짤한 맛',n:31,p:1},{t:'아삭아삭',n:22,p:1},{t:'매년 기다려요',n:15,p:1},{t:'물러진 것',n:4,p:0}],pos:[{t:'"매년 기다려져요! 진한 풍미가 최고"',a:'류지하',d:'2026.03'},{t:'"올리브오일 뿌려 먹으면 아주 맛나요"',a:'이정은',d:'2026.03'}],neg:[{t:'"한두 개 물러진 게 있었어요"',a:'김민정',d:'2025.05'}]}},
+
+  {name:'유기농 콜드브루',sub:'40ml x 12개 / 콜롬비아산',img:IMG+'42395C.jpg',dc:5,old:'15,000',now:'14,200',save:'800',
+   f1:'콜롬비아산 유기농 원두, 6~8시간 저온 추출 콜드브루',f2:'발달장애 청년의 자립을 응원하는 사회적 가치 소비',
+   tags:['유기농','사회적가치'],buying:5,
+   rv:{q:'"맛도 좋고 의미도 있어서 매달 주문해요"',a:'박지영 | 성동',s:5},rvData:null},
+
+  {name:'푸짐한 토막닭',sub:'1.4kg 13호 / 무항생제',img:IMG+'57259C.jpg',dc:20,old:'12,500',now:'10,000',save:'2,500',
+   f1:'무항생제 인증 닭, 먹기 좋게 토막낸 닭볶음탕용',f2:'오늘 저녁, 온 가족이 함께하는 한 냄비 요리에 딱',
+   tags:['무항생제','기획'],buying:38,
+   rv:{q:'"생협 닭은 냄새가 안 나서 아이들도 잘 먹어요"',a:'한나 | 성동',s:5},
+   rvData:{score:'4.7',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'45건',ai:'"냄새 없고 살이 탱탱하다"는 평이 주류.',posC:'40건(89%)',negC:'5건(11%)',kw:[{t:'냄새 없는',n:22,p:1},{t:'살 탱탱',n:16,p:1},{t:'아이도 잘 먹어',n:11,p:1},{t:'뼈 조각',n:3,p:0}],pos:[{t:'"냄새가 안 나서 아이들도 잘 먹어요"',a:'한나',d:'2026.02'}],neg:[{t:'"가끔 뼈 조각이 있어요"',a:'최윤서',d:'2025.10'}]}},
+
+  {name:'닭볶음탕 양념소스',sub:'200g / 국산 재료',img:IMG+'56349C.jpg',dc:10,old:'4,900',now:'4,400',save:'500',
+   f1:'깊은 맛의 비법 양념, 국산 재료로 정직하게 만든',f2:'토막닭에 부어 끓이기만 하면 밥 두 공기 보장',
+   tags:['국산재료'],buying:16,
+   rv:{q:'"양념 맛이 깊어요. 토막닭이랑 같이 사면 완벽한 한 끼"',a:'한나 | 성동',s:5},rvData:null},
+
+  {name:'유기농 해바라기씨유',sub:'750ml',img:IMG+'58220C.png',dc:25,old:'11,700',now:'8,800',save:'2,900',
+   f1:'이탈리아산 프리미엄 유기농 오일, 가벼운 풍미',f2:'볶음, 샐러드, 베이킹까지 매일 쓰는 기본 오일 업그레이드',
+   tags:['유기농','이탈리아산'],buying:23,
+   rv:{q:'"고소하면서 깔끔해요. 아이 간식 만들 때도 안심"',a:'박수진 | 경기남부',s:5},
+   rvData:{score:'4.8',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',count:'41건',ai:'"고소하면서 깔끔한 맛"이 가장 많이 언급. 아이 간식용 활용도 높다는 평가.',posC:'37건(90%)',negC:'4건(10%)',kw:[{t:'고소한',n:18,p:1},{t:'깔끔한 맛',n:14,p:1},{t:'아이 간식',n:9,p:1},{t:'뚜껑 불편',n:2,p:0}],pos:[{t:'"고소하면서 깔끔, 다른 오일로 못 돌아가겠어요"',a:'박수진',d:'2026.01'},{t:'"볶음밥에 쓰면 고소함이 확 올라가요"',a:'정은미',d:'2025.08'}],neg:[{t:'"뚜껑이 한 손으로 열기 어려워요"',a:'이정은',d:'2025.10'}]}},
+
+  {name:'돌돌대패삼겹살',sub:'3mm 얇게 손질 / 무항생제',img:IMG+'31451C.jpg',dc:10,old:'20,000',now:'18,000',save:'2,000',
+   f1:'3mm 얇게 손질한 대패삼겹, 무항생제 인증',f2:'불판 위에서 돌돌 말아 구우면 바삭 + 고소한 조합',
+   tags:['무항생제'],buying:6,
+   rv:{q:'"얇게 썰어져 있어서 굽기 편하고, 바삭하게 잘 구워져요"',a:'이정은 | 서울남부',s:4},rvData:null},
+
+  {name:'유기농 귀리유 YOU',sub:'16팩',img:IMG+'57232C.png',dc:20,old:'19,200',now:'15,300',save:'3,900',
+   f1:'국산 유기농 통귀리를 자연 발효, 고소하고 부드러운 맛',f2:'우유 대신, 커피에 넣어도 깔끔한 식물성 음료',
+   tags:['국산 유기농'],buying:50,
+   rv:{q:'"커피에 넣으면 두유보다 고소하고 깔끔. 16팩이라 매일 하나씩!"',a:'송지현 | 경기남부',s:5},
+   rvData:{score:'4.7',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'34건',ai:'커피에 넣어 마시는 용도로 인기. 두유보다 고소하고 깔끔하다는 평가 지배적.',posC:'30건(88%)',negC:'4건(12%)',kw:[{t:'고소한',n:18,p:1},{t:'커피에 딱',n:14,p:1},{t:'가성비',n:9,p:1},{t:'흔들어야 함',n:3,p:0}],pos:[{t:'"두유보다 고소하고 깔끔해요"',a:'송지현',d:'2026.03'},{t:'"라떼에 넣으면 칼로리도 낮고 맛도 좋아요"',a:'류지하',d:'2025.10'}],neg:[{t:'"흔들어 마셔야 해요"',a:'박지영',d:'2025.11'}]}},
+
+  {name:'생선조림 양념소스',sub:'100g',img:IMG+'56350C.jpg',dc:10,old:'2,900',now:'2,600',save:'300',
+   f1:'국산 재료로 만든 생선조림 전용 양념, 간편 조리',f2:'고등어, 갈치에 부어 졸이기만 하면 깊은 맛 완성',
+   tags:['국산재료'],buying:4,
+   rv:{q:'"고등어조림에 썼는데 맛집 느낌이에요!"',a:'정은미 | 경기남부',s:4},rvData:null},
+
+  {name:'담백한 올리브유 참치',sub:'MSC인증 가다랑어',img:IMG+'51467C.jpg',dc:11,old:'2,800',now:'2,500',save:'300',
+   f1:'MSC 인증 가다랑어에 유기농 채소, 담백한 올리브유',f2:'샐러드, 비빔밥, 김밥 속 재료로 활용도 만점',
+   tags:['MSC인증'],buying:76,
+   rv:{q:'"기름기 적고 담백해서 샐러드에 넣으면 최고예요"',a:'김민정 | 서울남부',s:4},rvData:null},
+
+  {name:'대저토마토',sub:'2.5kg / 무농약',img:IMG+'42324C.jpg',dc:11,old:'39,000',now:'34,900',save:'4,100',
+   f1:'대용량 2.5kg! 가족 모두 넉넉하게 즐기는 봄의 맛',f2:'무농약 인증, 단단한 과육과 짭짤한 풍미',
+   tags:['무농약','대용량'],buying:9,
+   rv:{q:'"2.5kg도 우리 집은 일주일이면 다 먹어요. 넉넉해서 좋아요"',a:'한나 | 성동',s:5},rvData:null},
+
+  {name:'유기농 녹차 콤부차',sub:'옹기 발효',img:IMG+'52075C.jpg',dc:21,old:'5,800',now:'4,600',save:'1,200',
+   f1:'옹기에서 천천히 발효한 녹차 콤부차, 유산균 살아있는',f2:'탄산음료 대신 마시는 프리미엄 발효 음료',
+   tags:['유기농','옹기발효'],buying:1,
+   rv:{q:'"탄산음료 대신 마시기 시작, 속이 편하고 은은한 녹차향"',a:'최윤서 | 서울남부',s:5},
+   rvData:{score:'4.5',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'15건',ai:'탄산음료 대체재로 인기. 옹기 발효 특유의 부드러운 탄산감과 녹차 향 호평.',posC:'12건(80%)',negC:'3건(20%)',kw:[{t:'속 편한',n:8,p:1},{t:'녹차향',n:6,p:1},{t:'단맛 부족',n:2,p:0}],pos:[{t:'"속이 편하고 녹차 향이 은은해요"',a:'최윤서',d:'2026.01'}],neg:[{t:'"좀 더 달았으면 좋겠어요"',a:'박수진',d:'2025.09'}]}},
+
+  {name:'우리콩조미유부',sub:'국산 콩 / 현미유',img:IMG+'2674C.png',dc:9,old:'4,300',now:'3,900',save:'400',
+   f1:'국산 콩과 현미유로 만든 조미유부, 해물액기스 소스 포함',f2:'유부초밥, 유부전골, 도시락 반찬으로 간편 활용',
+   tags:['국산콩'],buying:31,
+   rv:{q:'"유부초밥 만들기 딱 좋아요. 양념이 잘 되어있어요"',a:'한나 | 성동',s:4},rvData:null},
+
+  {name:'떡볶이 양념소스',sub:'110g',img:IMG+'56348C.jpg',dc:10,old:'2,900',now:'2,600',save:'300',
+   f1:'매콤달콤한 떡볶이 양념, 국산 재료로 만든',f2:'떡볶이떡에 부어 끓이기만 하면 분식집 그 맛',
+   tags:['국산재료'],buying:14,
+   rv:{q:'"매콤달콤 맛이 딱 좋아요. 아이도 어른도 좋아해요"',a:'김민정 | 서울남부',s:4},rvData:null},
+
+  {name:'유기농 떡볶이떡',sub:'유기농쌀 100% / 저온숙성',img:IMG+'44755C.png',dc:15,old:'5,900',now:'5,000',save:'900',
+   f1:'유기농 쌀 100%로 만든 쫄깃한 떡, 저온숙성으로 식감 UP',f2:'떡볶이, 떡국, 떡꼬치까지 다양하게 활용 가능',
+   tags:['유기농'],buying:22,
+   rv:{q:'"쫄깃함이 일반 떡이랑 차원이 달라요. 아이 간식으로 딱"',a:'한나 | 성동',s:4},rvData:null},
+
+  {name:'발아참기름',sub:'160ml / 국산 통참깨',img:IMG+'20707C.jpg',dc:10,old:'19,500',now:'17,500',save:'2,000',
+   f1:'압착공법으로 짠 국산 통참깨 참기름, 진한 고소함',f2:'나물 무칠 때, 비빔밥에 한 숟갈이면 풍미 완성',
+   tags:['국산','압착공법'],buying:11,
+   rv:{q:'"향이 진하고 고소해서 조금만 넣어도 맛이 확 살아요"',a:'류지하 | 서울남부',s:5},rvData:null},
+
+  {name:'고구마맛탕',sub:'쌀조청 소스',img:IMG+'56382C.jpg',dc:12,old:'7,800',now:'6,900',save:'900',
+   f1:'바삭함과 부드러움이 동시에, 쌀조청으로 만든 건강한 단맛',f2:'전자레인지 2분이면 완성, 아이 간식부터 술안주까지',
+   tags:['간편조리'],buying:8,
+   rv:{q:'"바삭하면서 달달해요. 에어프라이어에 돌리면 더 맛있어요"',a:'이수빈 | 경기남부',s:4},rvData:null},
+
+  {name:'발아볶은참깨',sub:'120g / 국산 참깨',img:IMG+'21180C.jpg',dc:15,old:'9,800',now:'8,300',save:'1,500',
+   f1:'국산 참깨 5회 세척, 발아 후 볶아 고소함 극대화',f2:'나물, 비빔밥, 샐러드 위에 솔솔 뿌리면 풍미 완성',
+   tags:['국산'],buying:28,
+   rv:{q:'"고소함이 확실히 다릅니다. 한번 쓰면 마트 참깨 못 써요"',a:'정은미 | 경기남부',s:5},rvData:null},
+
+  {name:'육즙가득 삼겹살',sub:'500g / 1.5cm 두께',img:IMG+'52933C.jpg',dc:15,old:'21,400',now:'18,200',save:'3,200',
+   f1:'두툼한 1.5cm 두께, 구우면 육즙이 살아있는',f2:'무항생제 돈육, 에어프라이어에도 캠핑에서도 맛있는',
+   tags:['무항생제'],buying:9,
+   rv:{q:'"두툼해서 구우면 육즙이 장난 아니에요. 캠핑 필수템!"',a:'류지하 | 서울남부',s:5},rvData:null},
+
+  {name:'타르타르소스',sub:'140g / 국산 유정란',img:IMG+'38965C.png',dc:5,old:'3,700',now:'3,500',save:'200',
+   f1:'국산 유정란과 현미유 마요네즈 베이스 타르타르소스',f2:'생선까스, 새우튀김, 샐러드에 뿌리면 레스토랑 맛',
+   tags:['국산 유정란'],buying:1,
+   rv:{q:'"시판 소스랑 확실히 달라요. 재료가 좋으니 맛도 좋아요"',a:'송지현 | 성동',s:4},rvData:null},
+
+  {name:'마파두부소스',sub:'150g',img:IMG+'54150C.jpg',dc:9,old:'4,400',now:'4,000',save:'400',
+   f1:'매콤칼칼한 감칠맛, 국산 재료로 만든 마파두부 전용',f2:'두부만 있으면 5분 만에 중식당 마파두부 완성',
+   tags:['국산재료'],buying:8,
+   rv:{q:'"두부에 부어서 끓이면 끝! 매콤칼칼한 게 밥도둑이에요"',a:'이정은 | 서울남부',s:4},rvData:null},
+
+  {name:'돼지통삼겹살',sub:'500g / 무항생제',img:IMG+'19330C.png',dc:10,old:'21,500',now:'19,300',save:'2,200',
+   f1:'부드러운 식감의 통삼겹, 다양한 요리에 활용 가능',f2:'수육, 보쌈, 구이까지 원하는 두께로 잘라 사용',
+   tags:['무항생제'],buying:6,
+   rv:{q:'"수육으로 해먹었는데 부드럽고 담백해요"',a:'박지영 | 성동',s:4},rvData:null},
+
+  {name:'두레생협 고추참치',sub:'MSC인증 가다랑어',img:IMG+'54721C.jpg',dc:8,old:'2,500',now:'2,300',save:'200',
+   f1:'MSC 인증 가다랑어에 고추장 양념, 매콤한 맛',f2:'비빔밥, 볶음밥, 라면에 넣으면 감칠맛 UP',
+   tags:['MSC인증'],buying:12,
+   rv:{q:'"매콤해서 비빔밥에 넣으면 맛있어요. 가다랑어라 담백해요"',a:'송지현 | 성동',s:4},rvData:null},
+
+  {name:'김치치즈주먹밥',sub:'4팩 / 현미 임실치즈',img:IMG+'58085C.png',dc:9,old:'7,500',now:'6,800',save:'700',
+   f1:'현미밥에 임실 치즈가 쏙, 전자레인지 2분이면 완성',f2:'아이 간식, 야식, 도시락으로 간편하고 맛있는 한 끼',
+   tags:['간편식'],buying:17,
+   rv:{q:'"전자레인지 돌리면 치즈가 쭉~ 아이가 너무 좋아해요"',a:'박수진 | 경기남부',s:5},rvData:null},
+
+  {name:'호두통밀식빵',sub:'350g / 우리밀 유정란',img:IMG+'49593C.jpg',dc:11,old:'6,400',now:'5,700',save:'700',
+   f1:'우리밀과 유정란으로 만든 건강한 식빵, 고소한 호두 듬뿍',f2:'토스트로 구우면 겉바속촉, 아침 식사 대용으로 딱',
+   tags:['우리밀'],buying:60,
+   rv:{q:'"호두가 듬뿍이라 고소해요. 구우면 겉바속촉 최고!"',a:'송지현 | 성동',s:5},rvData:null},
+
+  {name:'다짐 대구살',sub:'120g / 이유식용',img:IMG+'59265C.jpg',dc:10,old:'11,900',now:'10,700',save:'1,200',
+   f1:'담백한 대구살을 곱게 다진 이유식 전용 생선살',f2:'이유식부터 유아 반찬까지, 해동 후 바로 사용',
+   tags:['이유식'],buying:1,
+   rv:{q:'"아기 이유식에 넣었더니 잘 먹어요. 담백해서 좋아요"',a:'이수빈 | 경기남부',s:4},rvData:null},
+
+  {name:'다짐 참돔살',sub:'120g / 이유식용',img:IMG+'59267C.jpg',dc:11,old:'15,200',now:'13,600',save:'1,600',
+   f1:'담백하고 부드러운 참돔살을 곱게 다진 이유식 전용',f2:'죽, 미음에 넣기만 하면 영양 만점 한 끼 완성',
+   tags:['이유식'],buying:0,
+   rv:{q:'"이유식 만들기 정말 편해졌어요. 아기가 잘 먹어요"',a:'이수빈 | 경기남부',s:5},rvData:null},
+
+  {name:'다짐 광어살',sub:'120g / 이유식용',img:IMG+'59268C.jpg',dc:11,old:'13,200',now:'11,800',save:'1,400',
+   f1:'담백한 광어살을 곱게 다진 이유식 전용 생선살',f2:'해동 후 바로 사용, 이유식 초기부터 활용 가능',
+   tags:['이유식'],buying:0,
+   rv:{q:'"생선 손질 안 해도 되니까 이유식 만들기 수월해요"',a:'정은미 | 경기남부',s:4},rvData:null},
+
+  {name:'영광법성포 굴비',sub:'1.1kg / 10미',img:IMG+'58927C.jpg',dc:25,old:'136,000',now:'101,700',save:'34,300',
+   f1:'법성포 전통 방식 그대로, 제철 참조기 짭쪼름한 감칠맛',f2:'쫀득한 식감, 구워서 한 마리면 밥 한 공기 뚝딱',
+   tags:['제철','법성포'],buying:2,
+   rv:{q:'"명절에만 먹던 굴비를 이 가격에! 살이 두툼하고 짭짤한 게 밥도둑"',a:'김민정 | 서울남부',s:5},
+   rvData:{score:'4.7',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'23건',ai:'대부분 "살이 두툼하고 짭짤한 감칠맛"에 높은 만족. 선물용 호평.',posC:'19건(83%)',negC:'4건(17%)',kw:[{t:'두툼한 살',n:12,p:1},{t:'밥도둑',n:9,p:1},{t:'선물용',n:7,p:1},{t:'크기 편차',n:3,p:0},{t:'좀 짠',n:2,p:0}],pos:[{t:'"살이 두툼하고 짭짤한 게 밥 한 그릇 뚝딱이에요"',a:'김민정',d:'2026.02'},{t:'"시어머니 선물로 보냈는데 너무 좋아하셨어요"',a:'이수빈',d:'2025.12'}],neg:[{t:'"10미 중 2마리가 좀 작았어요"',a:'최윤서',d:'2025.11'}]}},
+
+  {name:'순진한 딸기콩포트',sub:'100% 국산 딸기',img:IMG+'57229C.jpg',dc:18,old:'12,100',now:'9,900',save:'2,200',
+   f1:'100% 국산 딸기로 만든 콩포트, 과육이 살아있는',f2:'요거트, 토스트, 팬케이크 위에 올려 먹으면 꿀맛',
+   tags:['국산 딸기'],buying:2,
+   rv:{q:'"딸기 과육이 진짜 들어있어요! 요거트에 올리면 카페 부럽지 않아요"',a:'송지현 | 성동',s:5},rvData:null},
+
+  {name:'웨하스 (딸기맛)',sub:'발아통밀 / 천연 딸기분말',img:IMG+'29044C.jpg',dc:13,old:'2,400',now:'2,100',save:'300',
+   f1:'발아통밀가루에 천연 딸기 분말로 만든 바삭한 웨하스',f2:'아이 간식으로 안심, 어른 커피 타임에도 딱 맞는 달콤함',
+   tags:['천연원료'],buying:28,
+   rv:{q:'"아이가 좋아해서 매주 주문해요. 천연 재료라 안심"',a:'박수진 | 경기남부',s:4},rvData:null},
+
+  {name:'오미자원액',sub:'700ml / 강원도산',img:IMG+'7470C.jpg',dc:5,old:'21,000',now:'19,900',save:'1,100',
+   f1:'강원도·충남산 생오미자를 발효한 원액, 새콤달콤',f2:'물에 타서 음료로, 요리 소스로도 활용하는 만능 원액',
+   tags:['국산'],buying:7,
+   rv:{q:'"물에 타먹으면 새콤달콤해서 온 가족이 좋아해요"',a:'최윤서 | 서울남부',s:4},rvData:null},
+
+  {name:'탄산수',sub:'500ml x 20개',img:IMG+'55631C.jpg',dc:10,old:'10,000',now:'9,000',save:'1,000',
+   f1:'천연암반수로 만든 탄산수, 제로 칼로리',f2:'그냥 마셔도, 과일 넣어 에이드로 만들어도 시원하게',
+   tags:['제로칼로리'],buying:9,
+   rv:{q:'"탄산이 세고 깔끔해요. 과일 넣어 에이드 만들면 최고"',a:'최윤서 | 서울남부',s:4},rvData:null},
+
+  {name:'딸기주스 (낱개)',sub:'100% 국산 딸기 / 무설탕',img:IMG+'25414C.png',dc:11,old:'1,400',now:'1,250',save:'150',
+   f1:'무설탕, 무첨가물 100% 국산 딸기 착즙 주스',f2:'아이 간식 음료로 안심, 상큼한 딸기맛 그대로',
+   tags:['무첨가'],buying:11,
+   rv:{q:'"진짜 딸기맛이에요! 아이가 매일 달라고 해요"',a:'박수진 | 경기남부',s:5},rvData:null},
+
+  {name:'유기농 멸균우유',sub:'24개입 / 유기 인증',img:IMG+'51568C.jpg',dc:5,old:'23,000',now:'21,800',save:'1,200',
+   f1:'유기 인증 목초로 키운 젖소, 130도 저온살균 멸균우유',f2:'상온 보관 가능, 24개 넉넉한 구성으로 가성비 좋은',
+   tags:['유기농'],buying:12,
+   rv:{q:'"상온 보관 되니까 쟁여두기 좋아요. 맛도 고소해요"',a:'김민정 | 서울남부',s:4},rvData:null},
+
+  {name:'법성포굴비',sub:'2.2kg / 20미(서풍)',img:IMG+'42854C.jpg',dc:20,old:'251,000',now:'200,800',save:'50,200',
+   f1:'제철 참조기 전통 방식 건조, 짭쪼름하고 쫀득한 식감',f2:'대용량 20미로 가족 모두 넉넉하게 즐기는 프리미엄',
+   tags:['제철','대용량'],buying:0,
+   rv:{q:'"양도 넉넉하고 맛도 일품. 온 가족이 두고두고 먹었어요"',a:'이수빈 | 경기남부',s:5},rvData:null},
+
+  {name:'무농약콩 두부',sub:'340g / 천연간수',img:IMG+'46725C.jpg',dc:6,old:'3,200',now:'3,000',save:'200',
+   f1:'천연 간수로 응고한 전통방식 두부, 탱글한 식감',f2:'찌개, 부침, 샐러드까지 매일 쓰는 기본 식재료',
+   tags:['무농약','전통방식'],buying:48,
+   rv:{q:'"콩 맛이 진하고 탱글탱글해요. 찌개에 넣으면 부서지지 않아요"',a:'이수빈 | 경기남부',s:5},rvData:null},
+
+  {name:'영광굴비',sub:'2kg / 20미(신진)',img:IMG+'405C.jpg',dc:20,old:'194,000',now:'155,200',save:'38,800',
+   f1:'전통 건조방식으로 만든 영광굴비, 짭조름한 맛',f2:'선물용으로도 손색없는 정갈한 포장',
+   tags:['전통건조'],buying:0,
+   rv:{q:'"전통 방식 맛이 살아있어요. 밑반찬으로 최고"',a:'정은미 | 경기남부',s:4},rvData:null},
+
+  {name:'영광굴비',sub:'2.2kg / 20미(신진)',img:IMG+'13422C.jpg',dc:10,old:'251,000',now:'225,900',save:'25,100',
+   f1:'전통 건조방식으로 만든 영광굴비, 짭조름한 맛',f2:'넉넉한 20미 구성, 제사/명절 준비에도 안성맞춤',
+   tags:['전통건조'],buying:0,
+   rv:{q:'"전통 방식이라 맛이 다릅니다. 제사상에 올리기 좋아요"',a:'김민정 | 서울남부',s:4},rvData:null},
+
+  {name:'영광굴비',sub:'1.8kg / 20미(신진)',img:IMG+'37778C.png',dc:10,old:'132,500',now:'119,200',save:'13,300',
+   f1:'전통 건조방식의 영광굴비, 쫀득한 식감',f2:'합리적 가격의 20미 구성, 일상에서 즐기는 굴비',
+   tags:['전통건조'],buying:0,
+   rv:{q:'"일상에서 먹기 좋은 가격이에요. 쫀득한 식감이 좋아요"',a:'박지영 | 성동',s:4},rvData:null},
+
+  {name:'김밥용단무지',sub:'무농약/유기농 무',img:IMG+'571C.jpg',dc:7,old:'4,400',now:'4,100',save:'300',
+   f1:'무농약 유기농 무로 만든 단무지, 발효식초 사용',f2:'김밥용으로 딱 맞는 크기, 아삭한 식감',
+   tags:['무농약'],buying:27,
+   rv:{q:'"아삭하고 짠맛이 적어서 좋아요. 김밥 만들 때 필수"',a:'정은미 | 경기남부',s:4},rvData:null},
+
+  {name:'김밥용햄',sub:'160g / 국산 돼지고기+한우',img:IMG+'10581C.png',dc:7,old:'5,400',now:'5,000',save:'400',
+   f1:'국산 돼지고기와 한우로 만든 프리미엄 햄, 훈연 향',f2:'김밥, 도시락, 아이 반찬으로 안심하고 쓰는 햄',
+   tags:['국산원료'],buying:39,
+   rv:{q:'"시판 햄이랑 맛이 확실히 다릅니다. 고기 맛이 나요"',a:'한나 | 성동',s:5},rvData:null},
+
+  {name:'에코 쿨핏 기능성 반팔티',sub:'블랙/화이트 S~L',img:IMG+'56740C.jpg',dc:10,old:'29,000',now:'26,000',save:'3,000',
+   f1:'식물성 원료, 친환경 나염으로 만든 오버핏 반팔티',f2:'기능성 소재로 시원하게, 일상부터 운동까지 활용',
+   tags:['친환경','식물성'],buying:1,
+   rv:{q:'"가볍고 시원해요. 핏도 예쁘고 친환경이라 기분 좋아요"',a:'류지하 | 서울남부',s:4},rvData:null}
+];
+
+// ======== RENDER SLIDES ========
+(function(){
+  var track = document.getElementById('track');
+  products.forEach(function(p, i){
+    var slide = document.createElement('div');
+    slide.className = 'slide';
+    var dcHTML = p.dc > 0 ? '<div class="dc-badge">'+p.dc+'%</div>' : '';
+    var tagsHTML = p.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+    var buyHTML = p.buying > 0 ? '<div class="buying"><span class="dot-live"></span> '+p.buying+'개 구매중</div>' : '';
+    var weekBadge = p.dc > 0 ? '<div class="week-only-badge">이번 주만 이 가격</div>' : '';
+    var buyCountHTML = p.buying > 0 ? '<div class="p-detail" style="color:var(--green);font-weight:600;margin-top:6px;">&#128722; 현재 '+p.buying+'개 구매중</div>' : '';
+    var oldHTML = p.old ? '<span class="p-old">'+p.old+'원</span>' : '';
+    var saveHTML = p.save ? '<span class="p-save">'+p.save+'원 절약</span>' : '';
+    var starsHTML = '';
+    for(var s=0;s<5;s++) starsHTML += s < p.rv.s ? '&#9733;' : '&#9734;';
+    var moreBtn = p.rvData ? '<button class="rv-more" data-idx="'+i+'" onclick="openSheet('+i+');event.stopPropagation();">의견 더보기 ('+p.rvData.count+') &#9660;</button>' : '';
+    var detailHTML = p.sub ? '<div class="p-detail">'+p.sub+'</div>' : '';
+
+    slide.innerHTML =
+      '<div class="prod-slide">'+
+        '<div class="img-area">'+
+          '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy">'+
+          dcHTML+
+          '<div class="tag-area">'+tagsHTML+'</div>'+
+          buyHTML+weekBadge+
+        '</div>'+
+        '<div class="info">'+
+          '<div class="feat">'+
+            '<div class="feat-line">'+p.f1+'</div>'+
+            '<div class="feat-line">'+p.f2+'</div>'+
+          '</div>'+
+          '<div class="pname">'+p.name+'</div>'+
+          '<div class="price-row">'+
+            oldHTML+
+            '<span class="p-now">'+p.now+'</span><span class="p-won">원</span>'+
+            saveHTML+
+          '</div>'+
+          detailHTML+
+          buyCountHTML+
+        '</div>'+
+        '<div class="rv-box">'+
+          '<div class="rv-q">'+p.rv.q+'</div>'+
+          '<div class="rv-meta"><span>'+p.rv.a+'</span><span class="rv-stars">'+starsHTML+'</span></div>'+
+        '</div>'+
+        moreBtn+
+        '<a class="cta-bottom" href="'+LINK+'" target="_blank">기획전에서 주문하기 &#10132;</a>'+
+      '</div>';
+    track.appendChild(slide);
+  });
+})();
+
+// ======== GUIDE OVERLAY ========
+(function(){
+  var g = document.getElementById('guideOverlay');
+  function dismiss(){ g.classList.add('hide'); setTimeout(function(){g.style.display='none';},600); }
+  g.addEventListener('click', dismiss);
+  g.addEventListener('touchstart', dismiss, {passive:true});
+  setTimeout(dismiss, 3000);
+})();
+
+// ======== SWIPER ========
+(function(){
+  var track = document.getElementById('track');
+  var ind = document.getElementById('pageInd');
+  var total = products.length + 1;
+  var cur = 0, startX = 0, dx = 0, dragging = false, animating = false;
+
+  function goTo(i){
+    if(animating) return;
+    cur = Math.max(0, Math.min(total-1, i));
+    track.style.transition = 'transform 0.35s cubic-bezier(0.22,0.68,0,1)';
+    track.style.transform = 'translateX('+ (-cur*100) +'%)';
+    ind.textContent = (cur+1)+' / '+total;
+    animating = true;
+    setTimeout(function(){animating=false;},360);
+  }
+
+  track.addEventListener('touchstart',function(e){
+    if(animating)return;
+    startX=e.touches[0].clientX; dx=0; dragging=true;
+    track.style.transition='none';
+  },{passive:true});
+
+  track.addEventListener('touchmove',function(e){
+    if(!dragging||animating)return;
+    dx = e.touches[0].clientX - startX;
+    var off = -cur * track.parentElement.offsetWidth + dx;
+    if((cur===0&&dx>0)||(cur===total-1&&dx<0)) off = -cur*track.parentElement.offsetWidth + dx*0.3;
+    track.style.transform = 'translateX('+off+'px)';
+  },{passive:true});
+
+  track.addEventListener('touchend',function(){
+    if(!dragging)return; dragging=false;
+    if(Math.abs(dx)>50) goTo(dx<0?cur+1:cur-1);
+    else goTo(cur);
+    dx=0;
+  });
+
+  // Mouse
+  var mDown=false,mX=0,mD=0;
+  track.addEventListener('mousedown',function(e){
+    if(animating)return; mDown=true; mX=e.clientX; mD=0;
+    track.style.transition='none'; e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!mDown)return; mD=e.clientX-mX;
+    track.style.transform='translateX('+(-cur*track.parentElement.offsetWidth+mD)+'px)';
+  });
+  document.addEventListener('mouseup',function(){
+    if(!mDown)return; mDown=false;
+    if(Math.abs(mD)>60) goTo(mD<0?cur+1:cur-1);
+    else goTo(cur);
+    mD=0;
+  });
+
+  // Keyboard
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(cur+1);}
+    if(e.key==='ArrowLeft'){e.preventDefault();goTo(cur-1);}
+  });
+
+  // Prevent link click on swipe
+  track.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(Math.abs(dx)>10||Math.abs(mD)>10) e.preventDefault();
+    });
+  });
+})();
+
+// ======== BOTTOM SHEET ========
+function openSheet(idx){
+  event.preventDefault();
+  var d = products[idx].rvData;
+  if(!d)return;
+  document.getElementById('shName').textContent = products[idx].name;
+  document.getElementById('shScore').textContent = d.score;
+  document.getElementById('shStars').innerHTML = d.stars;
+  document.getElementById('shCount').textContent = d.count;
+  document.getElementById('shAI').textContent = d.ai;
+  document.getElementById('shPosC').textContent = d.posC;
+  document.getElementById('shNegC').textContent = d.negC;
+
+  var kwH='';
+  d.kw.forEach(function(k){kwH+='<span class="sk-pill '+(k.p?'pos':'neg')+'">'+k.t+'<span class="sk-n">'+k.n+'</span></span>';});
+  document.getElementById('shKW').innerHTML=kwH;
+
+  var rH='<div class="sr-sec"><div class="sr-t pt">&#128077; 긍정 의견</div>';
+  d.pos.forEach(function(r){rH+='<div class="sr-i pi">'+r.t+'<div class="sr-m"><span>'+r.a+'</span><span>'+r.d+'</span></div></div>';});
+  rH+='</div><div class="sr-sec"><div class="sr-t nt">&#128078; 아쉬운 점</div>';
+  d.neg.forEach(function(r){rH+='<div class="sr-i ni">'+r.t+'<div class="sr-m"><span>'+r.a+'</span><span>'+r.d+'</span></div></div>';});
+  rH+='</div>';
+  document.getElementById('shRvs').innerHTML=rH;
+
+  document.getElementById('sheetOverlay').classList.add('open');
+  document.getElementById('sheet').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){
+  document.getElementById('sheetOverlay').classList.remove('open');
+  document.getElementById('sheet').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('sheetOverlay').addEventListener('click',closeSheet);
+(function(){
+  var sh=document.getElementById('sheet'),sY=0,dy=0;
+  sh.addEventListener('touchstart',function(e){if(sh.scrollTop<=0)sY=e.touches[0].clientY;},{passive:true});
+  sh.addEventListener('touchmove',function(e){if(!sY)return;dy=e.touches[0].clientY-sY;if(dy>0)sh.style.transform='translateX(-50%) translateY('+dy+'px)';},{passive:true});
+  sh.addEventListener('touchend',function(){if(dy>100)closeSheet();sh.style.transform='';sY=0;dy=0;});
+})();
+</script>
+
+</body>
+</html>

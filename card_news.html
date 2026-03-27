@@ -686,6 +686,88 @@
     letter-spacing: 1px;
   }
 
+  /* ===== EVENT CARD ===== */
+  .event-card {
+    background: linear-gradient(160deg, #01579b 0%, #0288d1 50%, #03a9f4 100%);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 28px;
+  }
+  .event-card .ev-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 7px 20px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .event-card .ev-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+  .event-card h2 {
+    font-size: clamp(28px, 7.5vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+  }
+  .event-card .ev-desc {
+    font-size: clamp(15px, 4vw, 17px);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    word-break: keep-all;
+  }
+  .event-card .ev-period {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 28px;
+  }
+  .event-card .ev-prizes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .event-card .ev-prize {
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 14px 12px;
+    flex: 1;
+    text-align: center;
+  }
+  .event-card .ev-prize .ep-icon { font-size: 28px; margin-bottom: 4px; }
+  .event-card .ev-prize .ep-name {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+  .event-card .ev-prize .ep-val {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+  .event-card .ev-btn {
+    display: inline-block;
+    background: #fff;
+    color: #01579b;
+    font-size: clamp(17px, 4.5vw, 20px);
+    font-weight: 900;
+    padding: 16px 44px;
+    border-radius: 32px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  .event-card .ev-how {
+    margin-top: 16px;
+    font-size: 13px;
+    opacity: 0.55;
+  }
+
   @media print {
     body { overflow: visible; background: #fff; }
     .swiper-track { flex-direction: column; transform: none !important; }
@@ -701,7 +783,7 @@
 
     <!-- 1. COVER -->
     <div class="card cover">
-      <div class="page-num">1 / 13</div>
+      <div class="page-num">1 / 14</div>
       <div class="week-badge">2026년 14주차</div>
       <div class="date-label">3.30(월) ~ 4.3(금) 배송</div>
       <div class="main-title">이번 주,<br>우리 밥상을<br>채워드립니다</div>
@@ -724,7 +806,7 @@
 
     <!-- 2. 대저토마토 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book1" target="_blank">
-      <div class="page-num">2 / 13</div>
+      <div class="page-num">2 / 14</div>
       <div class="prod-img">
         <img src="images/clean/daejeo_tomato_800.jpg" alt="대저토마토">
         <div class="discount-badge">최대 11%</div>
@@ -745,7 +827,7 @@
 
     <!-- 3. 대저토마토 리뷰 -->
     <a class="card review" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book1" target="_blank">
-      <div class="page-num">3 / 13</div>
+      <div class="page-num">3 / 14</div>
       <div class="review-top">
         <div class="r-label">대저토마토</div>
         <h2>먹어본 조합원이<br>먼저 알아봤어요</h2>
@@ -775,7 +857,7 @@
 
     <!-- 4. 별빛사과 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book2" target="_blank">
-      <div class="page-num">4 / 13</div>
+      <div class="page-num">4 / 14</div>
       <div class="prod-img">
         <img src="images/clean/starlight_apple.jpg" alt="별빛사과">
         <div class="tag-badge">기획</div>
@@ -794,7 +876,7 @@
 
     <!-- 5. 별빛사과 신뢰 -->
     <a class="card trust" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book2" target="_blank">
-      <div class="page-num">5 / 13</div>
+      <div class="page-num">5 / 14</div>
       <div class="trust-top">
         <div class="t-label">왜 별빛사과일까요?</div>
         <h2>얼굴 있는 먹거리,<br>그래서 더 안심입니다</h2>
@@ -834,7 +916,7 @@
 
     <!-- 6. 푸짐한 토막닭 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book3" target="_blank">
-      <div class="page-num">6 / 13</div>
+      <div class="page-num">6 / 14</div>
       <div class="prod-img">
         <img src="images/clean/chicken.jpg" alt="푸짐한 토막닭">
         <div class="discount-badge">20%</div>
@@ -855,7 +937,7 @@
 
     <!-- 7. 양념소스 4종 -->
     <a class="card multi" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book4" target="_blank">
-      <div class="page-num">7 / 13</div>
+      <div class="page-num">7 / 14</div>
       <div class="multi-top">
         <div class="m-label">첨가물 없이, 우리 재료로 정직하게</div>
         <h2>양념소스 4종</h2>
@@ -899,7 +981,7 @@
 
     <!-- 9. 대용량 반찬 한정 공급 -->
     <a class="card banchan" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book9" target="_blank">
-      <div class="page-num">8 / 13</div>
+      <div class="page-num">8 / 14</div>
       <div class="banchan-top">
         <div class="b-badge">4/1(화) ~ 4/3(목) 한정</div>
         <h2>두레맛찬<br>대용량</h2>
@@ -973,7 +1055,7 @@
 
     <!-- 10. 디카페인 콜드브루 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book6" target="_blank">
-      <div class="page-num">9 / 13</div>
+      <div class="page-num">9 / 14</div>
       <div class="prod-img">
         <img src="images/clean/coldbrew.jpg" alt="디카페인 콜드브루">
         <div class="discount-badge">10%</div>
@@ -994,7 +1076,7 @@
 
     <!-- 10. 손질갑오징어 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book0" target="_blank">
-      <div class="page-num">10 / 13</div>
+      <div class="page-num">10 / 14</div>
       <div class="prod-img">
         <img src="images/clean/squid.jpg" alt="손질갑오징어">
         <div class="discount-badge">24%</div>
@@ -1015,7 +1097,7 @@
 
     <!-- 11. 다짐생선살 3종 -->
     <a class="card trust" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book5" target="_blank" style="background:linear-gradient(180deg,#e3f2fd 0%,#fff 50%);">
-      <div class="page-num">11 / 13</div>
+      <div class="page-num">11 / 14</div>
       <div class="trust-top">
         <div class="t-label" style="color:#1565c0;">신규 출시</div>
         <h2>아이 이유식이<br>쉬워지는 한 팩</h2>
@@ -1048,7 +1130,7 @@
 
     <!-- 12. 하루담은 톡오미자 -->
     <a class="card prod" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book3" target="_blank">
-      <div class="page-num">12 / 13</div>
+      <div class="page-num">12 / 14</div>
       <div class="prod-img" style="background:#8b1a1a;">
         <img src="images/clean/omija.jpg" alt="하루담은 톡오미자">
         <div class="discount-badge">15%</div>
@@ -1067,9 +1149,41 @@
       <div class="cta-bottom">기획전에서 바로 주문하기 <span class="arrow">&#10132;</span></div>
     </a>
 
-    <!-- 13. CTA -->
+    <!-- 13. 우리바다 안심이력 댓글 이벤트 -->
+    <a class="card event-card" href="https://www.ecoop.or.kr/DureShop/event/event.do?returnTypeGb=event&returnNo=127" target="_blank">
+      <div class="page-num" style="color:rgba(255,255,255,0.35)">13 / 14</div>
+      <div class="ev-badge">3.26(목) ~ 4.18(금)</div>
+      <div class="ev-icon">&#127754;</div>
+      <h2>우리바다 안심이력<br>댓글 이벤트</h2>
+      <div class="ev-desc">
+        우리 바다를 지키는 수산물,<br>
+        안심이력제를 응원하는<br>
+        댓글 한 마디면 참여 완료!
+      </div>
+      <div class="ev-prizes">
+        <div class="ev-prize">
+          <div class="ep-icon">&#129424;</div>
+          <div class="ep-name">완도전복</div>
+          <div class="ep-val">500g</div>
+        </div>
+        <div class="ev-prize">
+          <div class="ep-icon">&#129438;</div>
+          <div class="ep-name">참굴비세트</div>
+          <div class="ep-val">선물용</div>
+        </div>
+        <div class="ev-prize">
+          <div class="ep-icon">&#127843;</div>
+          <div class="ep-name">수산 쿠폰</div>
+          <div class="ep-val">20% 할인</div>
+        </div>
+      </div>
+      <span class="ev-btn">이벤트 참여하기</span>
+      <div class="ev-how">댓글 작성만으로 참여 완료!</div>
+    </a>
+
+    <!-- 14. CTA -->
     <a class="card final" href="https://ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1651#book0" target="_blank">
-      <div class="page-num" style="color:rgba(255,255,255,0.3)">13 / 13</div>
+      <div class="page-num" style="color:rgba(255,255,255,0.3)">13 / 14</div>
       <div class="f-emoji">&#127793;</div>
       <h2>밥상 위의 작은 변화가<br>세상을 바꿉니다</h2>
       <div class="f-desc">생산자와 조합원이 함께 만드는<br>안전하고 정직한 먹거리,<br>이번 주도 두레생협이 함께합니다</div>
@@ -1102,7 +1216,7 @@
 (function() {
   var track = document.getElementById('track');
   var dots = document.querySelectorAll('.dot');
-  var total = 13;
+  var total = 14;
   var current = 0;
   var startY = 0, diffY = 0, dragging = false, isVertical = null;
   var animating = false;
