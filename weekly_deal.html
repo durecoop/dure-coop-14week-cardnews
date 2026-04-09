@@ -305,7 +305,7 @@
   <div class="guide-sub">옆으로 넘겨보세요</div>
 </div>
 
-<div class="page-ind" id="pageInd">1 / 51</div>
+<div class="page-ind" id="pageInd">1 / 64</div>
 
 <div class="swiper" id="swiper">
   <div class="swiper-track" id="track">
@@ -322,9 +322,9 @@
           <div class="divider2"></div>
           <div class="sub">조합원만을 위한 특별한 가격</div>
           <div class="stat-row">
-            <div class="stat"><div class="stat-num">50</div><div class="stat-label">할인 생활재</div></div>
-            <div class="stat"><div class="stat-num">30%</div><div class="stat-label">최대 할인</div></div>
-            <div class="stat"><div class="stat-num">240+</div><div class="stat-label">지금 주문 중</div></div>
+            <div class="stat"><div class="stat-num">63</div><div class="stat-label">할인 생활재</div></div>
+            <div class="stat"><div class="stat-num">35%</div><div class="stat-label">최대 할인</div></div>
+            <div class="stat"><div class="stat-num">400+</div><div class="stat-label">지금 주문 중</div></div>
           </div>
           <div class="trust-row">
             <span class="trust-pill">무항생제</span>
@@ -568,7 +568,55 @@ var products = [
 
   {name:'발아참기름',sub:'300ml',img:IMG+'20708C.jpg',dc:15,old:'36,900',now:'31,400',save:'5,500',
    f1:'국산 참깨를 발아시켜 맞춤 온도로 정성껏 볶아 짠',f2:'나물, 비빔밥, 볶음에 한 방울이면 풍미가 확 살아나는',
-   tags:['국산'],buying:0,rv:{q:'"향이 진하고 깊어요. 비빔밥에 넣으면 풍미가 확 달라져요"',a:'이*연 | 울림두레생협',s:5},rvData:null}
+   tags:['국산'],buying:0,rv:{q:'"향이 진하고 깊어요. 비빔밥에 넣으면 풍미가 확 달라져요"',a:'이*연 | 울림두레생협',s:5},rvData:null},
+
+  {name:'돌산갓김치',sub:'1kg / 국산',img:IMG+'59429C.jpg',dc:10,old:'10,000',now:'9,000',save:'1,000',
+   f1:'톡 쏘는 알싸함과 아삭한 돌산갓의 제철 김치',f2:'밥반찬은 물론 고기 쌈장 대신 곁들이면 개운한 맛',
+   tags:['국산','제철'],buying:4,rv:{q:'"알싸한 맛이 입맛을 확 돋워줘요. 봄에만 먹을 수 있어서 꼭 사요"',a:'박*정 | 푸른두레생협',s:5},rvData:null},
+
+  {name:'풋마늘대김치',sub:'500g / 국산',img:IMG+'59420C.jpg',dc:10,old:'10,500',now:'9,500',save:'1,000',
+   f1:'제철 풋마늘의 향긋함과 알싸한 풍미가 살아있는 김치',f2:'봄에만 맛볼 수 있는 별미 김치, 고기와 함께 먹으면 최고',
+   tags:['국산','제철'],buying:4,rv:{q:'"풋마늘 향이 진해서 입맛 없을 때 딱이에요"',a:'정*미 | 경기남부두레생협',s:5},rvData:null},
+
+  {name:'(맛찬)달래무침',sub:'맛찬 / 봄 달래',img:IMG+'58946C.jpg',dc:0,old:'',now:'6,400',save:'',
+   f1:'봄 달래의 알싸한 향이 살아있는 간편한 밑반찬',f2:'밥에 쓱쓱 비벼먹으면 봄이 입안 가득',
+   tags:['맛찬','제철'],buying:2,rv:{q:'"달래향이 진하고 양념이 딱 좋아요. 밥도둑!"',a:'이*진 | 고양파주두레생협',s:5},rvData:null},
+
+  {name:'(맛찬)꼬막양념무침',sub:'맛찬',img:IMG+'59024C.jpg',dc:0,old:'',now:'8,800',save:'',
+   f1:'탱글탱글한 꼬막에 매콤새콤 양념을 무친 별미 반찬',f2:'술안주로도 밥반찬으로도 인기 만점',
+   tags:['맛찬'],buying:0,rv:{q:'"꼬막이 탱글하고 양념이 찰져요. 자꾸 손이 가요"',a:'오*영 | 에코생협',s:5},rvData:null},
+
+  {name:'(맛찬)오이뱃두리',sub:'맛찬 / 한우',img:IMG+'58028C.png',dc:0,old:'',now:'5,700',save:'',
+   f1:'아삭한 오이 속에 고소한 한우 소를 채운 별미 반찬',f2:'한 입 베어물면 오이 아삭함과 한우 감칠맛이 동시에',
+   tags:['맛찬','한우'],buying:1,rv:{q:'"한우가 들어있어서 고급스러워요. 손님상에 딱!"',a:'김*선 | 은평두레생협',s:5},rvData:null},
+
+  {name:'(맛찬)지리멸치볶음',sub:'맛찬',img:IMG+'58030C.png',dc:0,old:'',now:'4,200',save:'',
+   f1:'고소한 지리멸치를 짜지 않게 볶아낸 기본 밑반찬',f2:'도시락에 넣어도, 밥 위에 올려도 고소한 한 젓가락',
+   tags:['맛찬'],buying:1,rv:{q:'"짜지 않아서 아이도 잘 먹어요. 항상 냉장고에 넣어둬요"',a:'곽*영 | 고양파주두레생협',s:5},rvData:null},
+
+  {name:'(맛찬)생깻잎무침',sub:'맛찬',img:IMG+'58634C.jpg',dc:0,old:'',now:'6,100',save:'',
+   f1:'신선한 생깻잎을 새콤달콤하게 무친 향긋한 반찬',f2:'고기 먹을 때 곁들이면 느끼함을 잡아주는 깻잎향',
+   tags:['맛찬'],buying:2,rv:{q:'"깻잎향이 진하고 양념이 맛있어요. 삼겹살이랑 최고"',a:'심*영 | 두레생협연합회',s:5},rvData:null},
+
+  {name:'(맛찬)감자채볶음',sub:'맛찬',img:IMG+'58636C.jpg',dc:0,old:'',now:'3,700',save:'',
+   f1:'얇게 채 썬 감자를 담백하게 볶아낸 깔끔한 반찬',f2:'아이부터 어른까지 누구나 좋아하는 기본 밑반찬',
+   tags:['맛찬'],buying:3,rv:{q:'"아삭하고 담백해서 질리지 않아요. 아이 도시락에 꼭 넣어요"',a:'최*경 | 경기두레생협',s:5},rvData:null},
+
+  {name:'프로바이오틱스',sub:'17종 유산균',img:IMG+'41515C.png',dc:35,old:'20,500',now:'13,300',save:'7,200',
+   f1:'17종 유산균, 하루 한 포로 간편하게 장 건강 관리',f2:'35% 최대 할인! 온 가족 건강 필수템',
+   tags:['건강기능식품'],buying:83,rv:{q:'"가족 모두 매일 챙겨 먹어요. 속이 편해졌어요"',a:'황*현 | 푸른두레생협',s:5},rvData:null},
+
+  {name:'루테인오메가3',sub:'눈+혈행+항산화',img:IMG+'42857C.jpg',dc:35,old:'22,600',now:'14,700',save:'7,900',
+   f1:'눈 건강, 혈행 개선, 항산화까지 한 번에',f2:'35% 할인! 컴퓨터·스마트폰 많이 보는 분께 추천',
+   tags:['건강기능식품'],buying:18,rv:{q:'"눈이 덜 피곤해진 느낌이에요. 할인할 때 꼭 사둬요"',a:'강*성 | 두레생협연합회',s:5},rvData:null},
+
+  {name:'비타민D 2200IU',sub:'채소분말+해조칼슘',img:IMG+'44787C.png',dc:35,old:'12,200',now:'7,900',save:'4,300',
+   f1:'하루 한 알로 비타민D 보충, 채소 분말과 해조 칼슘 함유',f2:'35% 할인! 실내 생활 많은 현대인 필수 영양제',
+   tags:['건강기능식품'],buying:19,rv:{q:'"작고 먹기 편해요. 온 가족이 하나씩 챙겨 먹습니다"',a:'김*화 | 경기두레생협',s:5},rvData:null},
+
+  {name:'야채가루',sub:'30스틱',img:IMG+'58287C.png',dc:35,old:'9,200',now:'6,000',save:'3,200',
+   f1:'대파·양파·표고·당근을 가루로, 스틱형 간편 조미료',f2:'35% 할인! 국·찌개에 한 봉지면 깊은 맛 완성',
+   tags:['국산'],buying:8,rv:{q:'"다시다 대신 써요. 천연 재료라 안심이고 맛도 좋아요"',a:'민*희 | 경기남부두레생협',s:5},rvData:null}
 ];
 
 // ======== RENDER SLIDES ========
