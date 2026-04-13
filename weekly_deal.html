@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>두레생협 금주 할인 생활재</title>
+<title>두레생협 15주 할인 생활재</title>
+<meta name="description" content="두레생협 15주 할인 — 30개 상품 최대 30% 할인">
+<meta property="og:title" content="두레생협 15주 할인 생활재 30개">
+<meta property="og:description" content="최대 30% 할인 — 4/6(월) ~ 4/10(금) — 카드뉴스로 넘겨보세요">
+<meta property="og:image" content="https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56259C.jpg">
+<meta property="og:url" content="https://durecoop.github.io/dure-coop-14week-cardnews/weekly_deal.html">
+<meta property="og:type" content="website">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
   :root {
@@ -22,13 +28,13 @@
   /* ===== SWIPER ===== */
   .swiper{width:100%;height:100%;position:relative;overflow:hidden;max-width:480px;margin:0 auto;}
   .swiper-track{
-    display:flex;flex-direction:row;
-    height:100%;
+    display:flex;flex-direction:column;
+    width:100%;
     transition:transform 0.4s cubic-bezier(0.22,0.68,0,1);
     will-change:transform;
   }
   .slide{
-    width:100vw;max-width:480px;height:100vh;height:100dvh;
+    width:100%;max-width:480px;height:100vh;height:100dvh;
     overflow:hidden;
     position:relative;
     flex-shrink:0;
@@ -44,128 +50,36 @@
     pointer-events:none;max-width:480px;
   }
 
-  /* ===== COVER SLIDE (책 표지 — 봄 벚꽃 테마) ===== */
+  /* ===== COVER SLIDE ===== */
   .cover{
-    background:linear-gradient(170deg,#fce4ec 0%,#f8bbd0 30%,#f48fb1 60%,#e8f5e9 100%);
+    background:linear-gradient(160deg,#145a24 0%,#2d8c3c 45%,#4caf50 100%);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;color:#2e4a34;padding:0;min-height:100%;
-    position:relative;overflow:hidden;
+    text-align:center;color:#fff;padding:0 28px;min-height:100%;
   }
-  .cover::before{
-    content:'';position:absolute;inset:0;
-    background:
-      radial-gradient(circle 300px at 20% 20%,rgba(255,255,255,0.6) 0%,transparent 70%),
-      radial-gradient(circle 250px at 80% 75%,rgba(255,182,193,0.35) 0%,transparent 60%);
-    pointer-events:none;
-  }
-
-  /* 벚꽃 꽃잎 애니메이션 */
-  .sakura-petal{
-    position:absolute;
-    width:12px;height:12px;
-    background:radial-gradient(ellipse at 30% 30%,#ffb7c5,#ff99aa);
-    border-radius:50% 0 50% 50%;
-    opacity:0;
-    pointer-events:none;
-    z-index:10;
-    animation:sakuraFall linear infinite;
-    box-shadow:0 0 4px rgba(255,183,197,0.3);
-  }
-  .sakura-petal::after{
-    content:'';position:absolute;
-    width:100%;height:100%;
-    background:radial-gradient(ellipse at 70% 70%,#ffc1cc,#ffaabb);
-    border-radius:50% 50% 0 50%;
-    top:-4px;left:4px;
-    opacity:0.7;
-  }
-  @keyframes sakuraFall{
-    0%{transform:translateY(-10vh) translateX(0) rotate(0deg) scale(1);opacity:0;}
-    10%{opacity:0.9;}
-    90%{opacity:0.7;}
-    100%{transform:translateY(110vh) translateX(-80px) rotate(360deg) scale(0.6);opacity:0;}
-  }
-
-  /* 프로모션 배너 */
-  .promo-banner{
-    position:absolute;top:max(50px,env(safe-area-inset-top,50px));left:50%;transform:translateX(-50%);
-    z-index:20;
-    background:linear-gradient(135deg,#e91e63,#c2185b);
-    color:#fff;
-    font-size:clamp(13px,3.8vw,16px);font-weight:900;
-    padding:10px 24px;border-radius:30px;
-    white-space:nowrap;
-    box-shadow:0 4px 20px rgba(233,30,99,0.4);
-    animation:promoPulse 2s ease-in-out infinite;
-    letter-spacing:-0.3px;
-  }
-  @keyframes promoPulse{
-    0%,100%{transform:translateX(-50%) scale(1);box-shadow:0 4px 20px rgba(233,30,99,0.4);}
-    50%{transform:translateX(-50%) scale(1.05);box-shadow:0 6px 28px rgba(233,30,99,0.55);}
-  }
-  .book-frame{
-    position:relative;width:calc(100% - 48px);max-width:380px;
-    border:none;
-    border-radius:28px;padding:40px 28px 36px;
-    background:rgba(255,255,255,0.8);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    box-shadow:0 8px 40px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);
-  }
-  .book-spine{display:none;}
-  .cover .brand{
-    display:inline-block;
-    font-size:12px;font-weight:800;letter-spacing:3px;
-    color:#fff;background:linear-gradient(135deg,#1a7f37,#2e9e4e);
-    padding:7px 18px;border-radius:20px;margin-bottom:24px;
-    box-shadow:0 3px 12px rgba(26,127,55,0.25);
-  }
-  .cover .divider{
-    width:32px;height:3px;background:linear-gradient(90deg,transparent,#1a7f37,transparent);
-    border-radius:2px;margin:0 auto 18px;opacity:0.4;
+  .cover .week-badge{
+    background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);
+    font-size:14px;font-weight:700;padding:8px 22px;border-radius:24px;margin-bottom:12px;
   }
   .cover h1{
-    font-size:clamp(26px,7vw,34px);font-weight:900;line-height:1.35;
-    letter-spacing:-0.5px;margin-bottom:10px;
-    background:linear-gradient(135deg,#1b5e20 0%,#2e7d32 50%,#43a047 100%);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    background-clip:text;
+    font-size:clamp(30px,8.5vw,42px);font-weight:900;line-height:1.25;
+    letter-spacing:-1.5px;margin-bottom:14px;
+    text-shadow:0 3px 16px rgba(0,0,0,0.15);
   }
-  .cover .period{
-    font-size:15px;font-weight:700;color:#fff;
-    margin-bottom:18px;letter-spacing:0.3px;
-    background:linear-gradient(135deg,#43a047,#2e7d32);
-    padding:8px 22px;border-radius:20px;
-    display:inline-block;
-    box-shadow:0 3px 12px rgba(46,125,50,0.2);
-  }
-  .cover .divider2{
-    width:20px;height:3px;background:linear-gradient(90deg,transparent,#1a7f37,transparent);
-    border-radius:2px;margin:0 auto 16px;opacity:0.25;
-  }
-  .cover .sub{font-size:14px;color:#7a8f7e;line-height:1.6;margin-bottom:22px;word-break:keep-all;font-weight:500;}
-  .cover .stat-row{display:flex;gap:12px;margin-bottom:22px;justify-content:center;}
-  .cover .stat{
-    background:linear-gradient(160deg,#f0faf2,#e0f2e4);
-    padding:12px 14px;border-radius:18px;min-width:82px;
-    border:1px solid rgba(27,94,32,0.08);
-  }
-  .cover .stat-num{font-size:22px;font-weight:900;color:#1b5e20;}
-  .cover .stat-label{font-size:10px;color:#81a888;margin-top:3px;font-weight:600;}
-  .cover .trust-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+  .cover .sub{font-size:16px;opacity:0.85;line-height:1.6;margin-bottom:28px;word-break:keep-all;}
+  .cover .stat-row{display:flex;gap:28px;margin-bottom:32px;}
+  .cover .stat-num{font-size:26px;font-weight:900;}
+  .cover .stat-label{font-size:11px;opacity:0.6;margin-top:2px;}
+  .cover .trust-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;}
   .cover .trust-pill{
-    background:#fff;border:1px solid rgba(27,94,32,0.1);
-    color:#558b5e;
-    padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;
-    box-shadow:0 1px 4px rgba(0,0,0,0.04);
+    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);
+    padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600;
   }
   .cover .swipe-hint{
-    position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
-    font-size:13px;color:#5a7d62;opacity:0.5;display:flex;align-items:center;gap:6px;
-    animation:hintPulse 2.5s ease-in-out infinite;
+    position:absolute;bottom:max(28px,env(safe-area-inset-bottom));
+    font-size:13px;opacity:0.5;display:flex;align-items:center;gap:6px;
   }
-  @keyframes hintPulse{0%,100%{opacity:0.5;transform:translateX(-50%) translateY(0);}50%{opacity:0.8;transform:translateX(-50%) translateY(-4px);}}
 
-  /* ===== FULL-SCREEN GUIDE OVERLAY ===== */
+  /* ===== GUIDE OVERLAY ===== */
   .guide-overlay{
     position:fixed;inset:0;z-index:500;
     background:rgba(0,0,0,0.7);
@@ -176,26 +90,18 @@
     max-width:480px;margin:0 auto;
   }
   .guide-overlay.hide{opacity:0;pointer-events:none;}
-  .guide-hand{
-    font-size:64px;
-    animation:guideSwipe 1.8s ease-in-out infinite;
-  }
-  .guide-text{
-    font-size:clamp(22px,6vw,28px);font-weight:900;
-    margin-top:16px;letter-spacing:-1px;line-height:1.4;
-  }
-  .guide-sub{
-    font-size:14px;opacity:0.6;margin-top:10px;
-  }
+  .guide-hand{font-size:64px;animation:guideSwipe 1.8s ease-in-out infinite;}
+  .guide-text{font-size:clamp(22px,6vw,28px);font-weight:900;margin-top:16px;letter-spacing:-1px;line-height:1.4;}
+  .guide-sub{font-size:14px;opacity:0.6;margin-top:10px;}
   @keyframes guideSwipe{
-    0%{transform:translateX(40px);opacity:0.4;}
-    40%{transform:translateX(-40px);opacity:1;}
-    70%{transform:translateX(-40px);opacity:1;}
-    100%{transform:translateX(40px);opacity:0.4;}
+    0%{transform:translateY(40px);opacity:0.4;}
+    40%{transform:translateY(-40px);opacity:1;}
+    70%{transform:translateY(-40px);opacity:1;}
+    100%{transform:translateY(40px);opacity:0.4;}
   }
 
   /* ===== PRODUCT SLIDE ===== */
-  .prod-slide{background:var(--card);height:100%;display:flex;flex-direction:column;overflow-y:auto;}
+  .prod-slide{background:var(--card);min-height:100%;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .prod-slide .img-area{
     position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#f5f5f5;flex-shrink:0;
   }
@@ -237,10 +143,6 @@
     font-size:14px;color:#555;line-height:1.55;word-break:keep-all;
     padding-left:14px;position:relative;margin-bottom:3px;
   }
-  .hl-marker{
-    background:linear-gradient(transparent 40%,#fff176 40%,#fff176 85%,transparent 85%);
-    font-weight:800;color:#333;padding:0 2px;
-  }
   .prod-slide .feat-line::before{
     content:'';position:absolute;left:0;top:8px;
     width:6px;height:6px;border-radius:50%;background:var(--green);
@@ -251,11 +153,8 @@
   }
   .prod-slide .price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
   .prod-slide .p-old{font-size:15px;color:#ccc;text-decoration:line-through;}
-  .prod-slide .p-now{
-    font-size:clamp(32px,9vw,42px);font-weight:900;color:var(--red);letter-spacing:-1.5px;
-    text-shadow:0 2px 8px rgba(229,57,53,0.2);
-  }
-  .prod-slide .p-won{font-size:18px;font-weight:800;color:var(--red);}
+  .prod-slide .p-now{font-size:clamp(28px,8vw,36px);font-weight:900;color:var(--red);letter-spacing:-1px;}
+  .prod-slide .p-won{font-size:17px;font-weight:700;color:var(--red);}
   .prod-slide .p-save{
     display:inline-block;background:var(--red-bg);color:var(--red);
     font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;
@@ -339,46 +238,134 @@
   .sr-i.pi{background:#f6faf6;border-left:3px solid #4caf50;color:#333;}
   .sr-i.ni{background:#fef6f6;border-left:3px solid #ef5350;color:#333;}
   .sr-i .sr-m{margin-top:6px;font-size:11px;color:#bbb;display:flex;justify-content:space-between;}
+
+  /* ===== RANKING BADGE ===== */
+  .rank-badge{
+    position:absolute;top:max(14px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);
+    z-index:5;display:flex;align-items:center;gap:6px;
+    background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
+    color:#fff;padding:6px 16px;border-radius:20px;
+    font-size:13px;font-weight:800;letter-spacing:-0.3px;
+  }
+  .rank-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;
+    font-size:14px;font-weight:900;
+  }
+  .rank-1 .rank-num{background:#FFD700;color:#5a4000;}
+  .rank-2 .rank-num{background:#C0C0C0;color:#444;}
+  .rank-3 .rank-num{background:#CD7F32;color:#fff;}
+  .rank-label{font-size:11px;opacity:0.7;font-weight:500;}
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-wrap{
+    position:fixed;bottom:max(52px,calc(env(safe-area-inset-bottom) + 52px));left:50%;transform:translateX(-50%);
+    width:calc(100% - 80px);max-width:360px;z-index:150;
+    pointer-events:none;
+  }
+  .progress-bar{
+    height:3px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;background:var(--green);border-radius:2px;
+    transition:width 0.4s cubic-bezier(0.22,0.68,0,1);width:0%;
+  }
+
+  /* ===== BUYING COUNT ENHANCED ===== */
+  .prod-slide .buying{
+    position:absolute;bottom:12px;left:14px;
+    background:rgba(26,127,55,0.85);backdrop-filter:blur(6px);
+    color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:18px;
+    display:flex;align-items:center;gap:5px;
+    animation:buyPulse 2s ease-in-out infinite;
+  }
+  @keyframes buyPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+  /* ===== SAVINGS HIGHLIGHT ===== */
+  .prod-slide .p-save{
+    display:inline-block;background:var(--red-bg);color:var(--red);
+    font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px;
+    animation:savePop 0.6s ease-out;
+  }
+  @keyframes savePop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+
+  /* ===== FORMAT NAV (cross-link) ===== */
+  .format-nav{
+    position:fixed;bottom:max(8px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+    z-index:200;display:flex;gap:4px;
+    background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);
+    border-radius:24px;padding:4px;max-width:280px;
+  }
+  .fn-item{
+    padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;
+    text-decoration:none;color:rgba(255,255,255,0.6);
+    transition:all 0.2s;white-space:nowrap;
+  }
+  .fn-item.active{background:var(--green);color:#fff;}
+  .fn-item:not(.active):active{color:#fff;}
+
+  /* ===== FONT SIZE TOGGLE ===== */
+  .font-ctrl{
+    position:fixed;top:max(10px,env(safe-area-inset-top));right:52px;z-index:200;
+    display:flex;gap:2px;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);
+    border-radius:10px;padding:2px;
+  }
+  .font-ctrl button{
+    border:none;background:none;cursor:pointer;padding:6px 10px;
+    border-radius:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);
+    transition:all 0.2s;min-height:32px;
+  }
+  .font-ctrl button.on{background:var(--green);color:#fff;}
 </style>
 </head>
 <body>
+
+<!-- FORMAT NAV -->
+<nav class="format-nav">
+  <a href="https://durecoop.github.io/magazine/W15/" class="fn-item">기획전</a>
+  <a href="https://durecoop.github.io/dure-coop-14week-cardnews/weekly_deal.html" class="fn-item active">카드뉴스</a>
+  <a href="https://durecoop.github.io/magazine/W15-focus/" class="fn-item">추천상품</a>
+</nav>
+
+<!-- FONT SIZE -->
+<div class="font-ctrl">
+  <button onclick="cSz(0.9)" id="cf1">A-</button>
+  <button onclick="cSz(1)" id="cf2" class="on">A</button>
+  <button onclick="cSz(1.15)" id="cf3">A+</button>
+</div>
 
 <!-- GUIDE OVERLAY -->
 <div class="guide-overlay" id="guideOverlay">
   <div class="guide-hand">&#128070;</div>
   <div class="guide-text">밀어서<br>생활재 보기</div>
-  <div class="guide-sub">옆으로 넘겨보세요</div>
+  <div class="guide-sub">위로 넘겨보세요</div>
 </div>
 
-<div class="page-ind" id="pageInd">1 / 64</div>
+<div class="page-ind" id="pageInd">1 / 31</div>
+<div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
 
 <div class="swiper" id="swiper">
   <div class="swiper-track" id="track">
 
-    <!-- COVER (slide 0) — 책 표지 -->
+    <!-- COVER (slide 0) -->
     <div class="slide">
-      <div class="cover" id="coverSlide">
-        <div class="promo-banner">단 2주간! 최대 35% 봄맞이 빅세일</div>
-        <div class="book-frame">
-          <div class="book-spine"></div>
-          <div class="brand">두레생협</div>
-          <div class="divider"></div>
-          <h1>금주의<br>할인 생활재</h1>
-          <div class="period">4/13(월) ~ 4/17(금)</div>
-          <div class="divider2"></div>
-          <div class="sub">조합원만을 위한 특별한 가격</div>
-          <div class="stat-row">
-            <div class="stat"><div class="stat-num">63</div><div class="stat-label">할인 생활재</div></div>
-            <div class="stat"><div class="stat-num">35%</div><div class="stat-label">최대 할인</div></div>
-            <div class="stat"><div class="stat-num">400+</div><div class="stat-label">지금 주문 중</div></div>
-          </div>
-          <div class="trust-row">
-            <span class="trust-pill">무항생제</span>
-            <span class="trust-pill">무농약</span>
-            <span class="trust-pill">신선 냉장 배송</span>
-          </div>
+      <div class="cover">
+        <div class="week-badge">2026년 15주차</div>
+        <h1>조합원이<br>가장 많이 찾는<br>이번 주 TOP 30</h1>
+        <div class="sub">판매 데이터 기반 인기 상품 엄선<br>4/6(월) ~ 4/10(금)</div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-num">30</div><div class="stat-label">엄선 상품</div></div>
+          <div class="stat"><div class="stat-num">30%</div><div class="stat-label">최대 할인</div></div>
+          <div class="stat"><div class="stat-num">350+</div><div class="stat-label">지금 주문 중</div></div>
         </div>
-        <div class="swipe-hint">옆으로 밀어서 생활재 보기 &#8594;</div>
+        <div class="trust-row">
+          <span class="trust-pill">&#9989; 무항생제</span>
+          <span class="trust-pill">&#127807; 무농약</span>
+          <span class="trust-pill">&#129309; 생산자 직거래</span>
+          <span class="trust-pill">&#128230; 신선 냉장 배송</span>
+        </div>
+        <div class="swipe-hint">위로 밀어서 상품 보기 &#8593;</div>
       </div>
     </div>
 
@@ -409,278 +396,534 @@
 </div>
 
 <script>
-// ======== SAKURA (벚꽃) EFFECT ========
-(function(){
-  var cover=document.getElementById('coverSlide');
-  if(!cover)return;
-  for(var i=0;i<20;i++){
-    var p=document.createElement('div');
-    p.className='sakura-petal';
-    var size=8+Math.random()*12;
-    p.style.width=size+'px';
-    p.style.height=size+'px';
-    p.style.left=Math.random()*100+'%';
-    p.style.animationDuration=(4+Math.random()*6)+'s';
-    p.style.animationDelay=(Math.random()*8)+'s';
-    cover.appendChild(p);
-  }
-})();
-
-// ======== PRODUCT DATA (50 items) ========
-var IMG = 'https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/';
+// ======== PRODUCT DATA ========
+var IMG = 'https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage';
 var LINK = 'https://www.ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1655';
 
 var products = [
-  {name:'6년근홍삼엑기스',sub:'60팩',img:IMG+'6116C.png',dc:18,old:'145,500',now:'119,300',save:'26,200',
-   f1:'6년근 홍삼을 청주에서 저온으로 9번 반복해 찌고 말린 정성',f2:'가정의달 부모님 선물로 미리 준비하면 할인까지',
-   tags:['국산','가정의달'],buying:0,rv:{q:'"어머니께 드렸더니 맛도 좋고 몸이 가벼워졌다고 하세요"',a:'한*혜 | 에코생협',s:5},rvData:null},
-
-  {name:'한우보양탕',sub:'냉동',img:IMG+'54638C.jpg',dc:20,old:'13,000',now:'10,400',save:'2,600',
-   f1:'한우 양지와 국내산 약재를 푹 삶아 감칠맛 가득',f2:'해동 후 끓이기만 하면 보양식 한 끼, 냉동실에 쟁여두기 좋은',
-   tags:['국산','한우'],buying:3,rv:{q:'"간편하게 한우 보양식을 먹을 수 있어서 좋아요"',a:'김*연 | 경기두레생협',s:5},rvData:null},
-
-  {name:'(G) 3겹둥근휴지',sub:'30롤',img:IMG+'59402C.png',dc:23,old:'24,800',now:'19,000',save:'5,800',
-   f1:'⚡ <span class=\"hl-marker\">수·목·금 단 3일만 공급!</span> 놓치면 다음 주까지 기다려야 해요',f2:'우유갑 재활용 3겹 휴지, 유해성분 무첨가 30롤 대용량',
-   tags:['친환경','대용량','한정공급'],buying:0,rv:{q:'"부드럽고 잘 안 끊어져서 좋아요. 대용량이라 오래 써요"',a:'김*주 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'녹용엑기스(여성)',sub:'60팩',img:IMG+'3069C.jpg',dc:12,old:'142,900',now:'125,800',save:'17,100',
-   f1:'거제도 친환경 자연방목 꽃사슴 녹용에 6년근 홍삼과 10가지 약재',f2:'가정의달 어머니 건강 선물로 딱, 12% 할인 찬스',
-   tags:['자연방목','가정의달'],buying:0,rv:{q:'"어머니가 드시고 기력이 많이 좋아지셨다고 하세요"',a:'이*숙 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'쑥버무리',sub:'250g',img:IMG+'54286C.jpg',dc:4,old:'4,800',now:'4,600',save:'200',
-   f1:'봄 생쑥 37% 함유, 밤과 대추로 영양 가득 담은 떡',f2:'쫄깃한 쑥향 가득, 봄 제철 간식으로 안성맞춤',
-   tags:['제철','국산'],buying:38,rv:{q:'"봄에만 먹을 수 있는 쑥향이 진해서 너무 맛있어요"',a:'박*정 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'강영진 블루베리',sub:'100g / 제주산',img:IMG+'56794C.jpg',dc:0,old:'',now:'11,500',save:'',
-   f1:'제주 산간 청정 환경에서 키운 달콤한 보랏빛 베리',f2:'올해 첫 출하! 아침 시리얼이나 요거트에 올려 즐기세요',
-   tags:['제주산','햇출하'],buying:3,rv:{q:'"알이 크고 달아요. 요거트에 넣어 먹으면 최고!"',a:'권*주 | 참좋은두레생협',s:5},rvData:null},
-
-  {name:'흑염소탕',sub:'냉동',img:IMG+'54255C.jpg',dc:13,old:'20,500',now:'17,800',save:'2,700',
-   f1:'국산 흑염소를 통째로 고아 직화솥에서 잡내 완벽 제거',f2:'보양식의 대명사, 끓이기만 하면 든든한 한 끼',
-   tags:['국산'],buying:0,rv:{q:'"잡내 없이 깔끔해요. 몸보신용으로 부모님께 보내드렸어요"',a:'정*복 | 평택두레생협',s:5},rvData:null},
-
-  {name:'통닭다리 누룽지삼계탕',sub:'냉동',img:IMG+'54730C.jpg',dc:10,old:'8,300',now:'7,500',save:'800',
-   f1:'국산 통닭다리에 누룽지로 구수함을 더한 간편 보양식',f2:'전자레인지 조리 가능, 혼밥 보양식으로 제격',
-   tags:['국산'],buying:0,rv:{q:'"누룽지가 들어있어서 구수하고 양도 딱 좋아요"',a:'최*경 | 경기두레생협',s:4},rvData:null},
-
-  {name:'달래장',sub:'제철 달래',img:IMG+'56698C.jpg',dc:10,old:'11,500',now:'10,400',save:'1,100',
-   f1:'제철 달래를 듬뿍 넣어 만든 향긋한 양념장',f2:'나물밥에 비벼도, 두부에 올려도, 봄밥상 만능 소스',
-   tags:['제철','국산'],buying:3,rv:{q:'"봄에만 먹을 수 있는 향긋함! 밥도둑이에요"',a:'박*정 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'햇장봉재래김',sub:'50매',img:IMG+'323C.png',dc:30,old:'11,200',now:'7,800',save:'3,400',
-   f1:'인천 장봉도에서 지주식으로 양식한 후 재래식 제조',f2:'30% 대폭 할인! 바삭한 참기름 김 한 장이면 밥 한 공기 뚝딱',
-   tags:['국산','장봉도'],buying:3,rv:{q:'"재래김 중 최고, 고소하고 바삭해서 항상 주문해요"',a:'정*미 | 경기남부두레생협',s:5},rvData:null},
-
-  {name:'순우유',sub:'900ml / 무항생제',img:IMG+'28485C.png',dc:9,old:'4,400',now:'4,000',save:'400',
-   f1:'무항생제 인증 원유로 만든 진하고 고소한 순수 우유',f2:'매일 마시는 우유, 온 가족이 안심하고 마실 수 있는',
-   tags:['무항생제'],buying:46,rv:{q:'"진하고 고소해서 매주 꼭 사요. 우리 가족 필수품!"',a:'김*화 | 경기두레생협',s:5},
-   rvData:{score:'4.5',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'52건',ai:'"진하고 고소하다"는 평가 압도적. 무항생제 인증으로 아이에게 안심. 일부 "플라스틱 용기 개선" 요청.',posC:'45건(87%)',negC:'7건(13%)',kw:[{t:'고소한',n:18,p:1},{t:'진한 맛',n:15,p:1},{t:'아이 간식',n:10,p:1},{t:'무항생제',n:8,p:1},{t:'용기 불편',n:4,p:0}],pos:[{t:'"라떼 해먹으면 유독 맛있어요, 매주 사요"',a:'강*성',d:'두레생협연합회'},{t:'"아이 우유로 믿고 먹입니다. 고소해요"',a:'김*화',d:'경기두레생협'}],neg:[{t:'"플라스틱 용기가 매번 불편합니다"',a:'김*진',d:'경기두레생협'}]}},
-
-  {name:'훈제오리',sub:'무항생제',img:IMG+'40549C.jpg',dc:25,old:'13,300',now:'10,000',save:'3,300',
-   f1:'무항생제 오리를 참나무로 훈연, 두레 양조간장 조미',f2:'25% 할인! 구워서 쌈에 싸먹으면 캠핑 느낌 가득',
-   tags:['무항생제'],buying:24,rv:{q:'"참나무 훈연 향이 좋고 잡내가 전혀 없어요"',a:'이*현 | 평택두레생협',s:5},rvData:null},
-
-  {name:'염장 미역줄기',sub:'300g',img:IMG+'58827C.jpg',dc:13,old:'3,100',now:'2,700',save:'400',
-   f1:'탱글한 식감의 염장 미역줄기, 다양하게 활용 가능',f2:'초무침, 볶음, 국거리까지 봄철 밑반찬으로 딱',
-   tags:['국산'],buying:6,rv:{q:'"초무침 해먹으면 새콤탱글해서 밥반찬으로 최고예요"',a:'윤*영 | 서울남부두레생협',s:5},rvData:null},
-
-  {name:'풀만먹인 양 프렌치랙',sub:'320g',img:IMG+'58630C.jpg',dc:15,old:'29,900',now:'25,400',save:'4,500',
-   f1:'100% 풀만 먹인 양고기, 오직 두레에서만 만나는 프리미엄',f2:'에어프라이어로 간편하게 구워 특별한 저녁 식탁',
-   tags:['독점','프리미엄'],buying:1,rv:{q:'"에어프라이어에 구웠는데 레스토랑 맛이에요. 대만족!"',a:'김*정 | 참좋은두레생협',s:5},rvData:null},
-
-  {name:'녹용엑기스(남성)',sub:'60팩',img:IMG+'17756C.jpg',dc:12,old:'142,900',now:'125,800',save:'17,100',
-   f1:'친환경 자연방목 꽃사슴 녹용에 6년근 홍삼과 10가지 약재',f2:'가정의달 아버지 건강 선물, 미리 준비하면 12% 할인',
-   tags:['자연방목','가정의달'],buying:0,rv:{q:'"아버지 생신 선물로 드렸어요. 맛있게 드시더라고요"',a:'김*윤 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'염장 톳',sub:'300g',img:IMG+'58937C.jpg',dc:12,old:'4,200',now:'3,700',save:'500',
-   f1:'톡톡 터지는 식감의 염장 톳, 빈혈 예방에 좋은 영양식',f2:'밥에 비벼도, 샐러드에 올려도 바다향 가득',
-   tags:['국산'],buying:1,rv:{q:'"톡톡 터지는 식감이 재밌어요. 비빔밥에 넣으면 맛있어요"',a:'심*영 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'구운김밥김',sub:'15매 / 유기가공인증',img:IMG+'20402C.png',dc:0,old:'',now:'3,700',save:'',
-   f1:'유기가공 인증 김밥김, 두 번 구워 풍미 가득',f2:'공급 재개! 김밥 도시락 싸는 날, 이 김이면 충분',
-   tags:['유기인증','공급재개'],buying:0,rv:{q:'"다시 나와서 너무 반가워요! 고소하고 잘 안 찢어져요"',a:'이*현 | 평택두레생협',s:5},rvData:null},
-
-  {name:'친환경 흑향미',sub:'800g / 블랙데이',img:IMG+'35C.jpg',dc:11,old:'6,600',now:'5,900',save:'700',
-   f1:'강원도 화천 유기농 재배 흑향미, 안전성 검사 우수',f2:'4/14 블랙데이 기획! 잡곡밥에 섞으면 고소한 블랙푸드',
-   tags:['유기농','블랙데이'],buying:6,rv:{q:'"잡곡밥에 넣으면 색도 예쁘고 고소해요. 영양도 좋고"',a:'정*윤 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'등심탕수육',sub:'모래틈돼지 등심',img:IMG+'43112C.png',dc:8,old:'12,500',now:'11,500',save:'1,000',
-   f1:'모래틈 돼지 등심으로 만든 탕수육, 국내산 현미유 사용',f2:'봄 나들이 도시락에 넣으면 인기 만점 메뉴',
-   tags:['국산'],buying:4,rv:{q:'"아이들이 너무 좋아해요. 소스도 맛있고 고기가 부드러워요"',a:'곽*영 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'날치알골드',sub:'유기농 설탕·소금',img:IMG+'22743C.jpg',dc:20,old:'8,500',now:'6,800',save:'1,700',
-   f1:'유기농 설탕과 소금만 사용한 프리미엄 날치알',f2:'훈제연어와 함께 밥 위에 올리면 집에서 덮밥 완성',
-   tags:['유기농'],buying:4,rv:{q:'"톡톡 터지는 식감이 좋아요. 밥 위에 올리면 아이들이 환호해요"',a:'오*영 | 에코생협',s:5},rvData:null},
-
-  {name:'현미식초',sub:'900ml',img:IMG+'777C.jpg',dc:4,old:'4,500',now:'4,300',save:'200',
-   f1:'충남 보령산 현미와 국산 엿기름 원료, 글루타민산소다 미사용',f2:'초무침, 피클, 새콤한 양념장에 두루두루 쓰이는 기본 식초',
-   tags:['국산'],buying:7,rv:{q:'"초무침할 때 꼭 이 식초 써요. 자극적이지 않고 부드러워요"',a:'민*희 | 경기남부두레생협',s:5},rvData:null},
-
-  {name:'항공직송 훈제연어',sub:'160g',img:IMG+'50955C.jpg',dc:20,old:'13,500',now:'10,800',save:'2,700',
-   f1:'노르웨이 청정해역 연어를 전통 훈연 방식으로 가공',f2:'20% 할인! 샐러드, 카나페, 덮밥에 올려 간편한 별미',
-   tags:['항공직송'],buying:11,rv:{q:'"부드럽고 짭짤한 훈제향이 일품이에요"',a:'이*영 | 서울남부두레생협',s:5},rvData:null},
-
-  {name:'풀만먹인 양 어깨살',sub:'600g',img:IMG+'58631C.png',dc:15,old:'15,500',now:'13,100',save:'2,400',
-   f1:'100% 풀만 먹인 양고기, 오직 두레에서만 만나는 가성비 부위',f2:'구이, 수육, 찜 등 다양하게 활용 가능한 넉넉한 600g',
-   tags:['독점'],buying:5,rv:{q:'"양고기 특유의 냄새가 거의 없어서 온 가족이 잘 먹었어요"',a:'김*란 | 경기두레생협',s:5},rvData:null},
-
-  {name:'토마토미트 파스타소스',sub:'유기농 토마토',img:IMG+'58608C.jpg',dc:5,old:'5,700',now:'5,400',save:'300',
-   f1:'유기농 토마토와 페이스트 사용, 합성첨가물 무첨가',f2:'파스타 삶아서 비비기만 하면 이탈리안 한 끼 완성',
-   tags:['유기농'],buying:1,rv:{q:'"토마토 맛이 진하고 첨가물 걱정 없어서 좋아요"',a:'이*연 | 울림두레생협',s:5},rvData:null},
-
-  {name:'까르보나라 파스타소스',sub:'국산 생크림·유기농 우유',img:IMG+'58609C.jpg',dc:5,old:'6,200',now:'5,900',save:'300',
-   f1:'국산 생크림과 유기농 우유로 만든 부드러운 크림 소스',f2:'면에 비벼 전자레인지 1분이면 진한 까르보나라 완성',
-   tags:['국산'],buying:2,rv:{q:'"크림이 진하고 부드러워요. 아이가 제일 좋아하는 파스타"',a:'최*우 | 주민두레생협',s:5},rvData:null},
-
-  {name:'맷돌소금',sub:'볶은소금 1kg',img:IMG+'763C.png',dc:10,old:'6,100',now:'5,500',save:'600',
-   f1:'자연적으로 간수를 제거한 안전한 소금, 적당한 염도',f2:'볶음, 찌개, 절임 등 요리 기본 양념으로 꼭 필요한',
-   tags:['국산'],buying:7,rv:{q:'"김장할 때도 쓰고 평소 요리에도 써요. 간이 깔끔해요"',a:'정*애 | 참좋은두레생협',s:5},rvData:null},
-
-  {name:'섬진강재첩국',sub:'경남 하동산',img:IMG+'7122C.jpg',dc:10,old:'7,100',now:'6,400',save:'700',
-   f1:'경남 하동산 생재첩을 10시간 해감 후 정성껏 끓인',f2:'속 풀리는 시원한 국물, 해장으로도 보양식으로도 딱',
-   tags:['국산'],buying:5,rv:{q:'"국물이 시원하고 깊어요. 해장국으로 최고입니다"',a:'길*배 | 서울남부두레생협',s:5},rvData:null},
-
-  {name:'열무김치',sub:'1kg / 국산',img:IMG+'28224C.png',dc:7,old:'7,000',now:'6,500',save:'500',
-   f1:'국산 열무에 새우젓, 멸치액젓으로 깔끔하게 담근',f2:'비빔밥, 비빔국수에 올리면 봄 향기 가득한 한 끼',
-   tags:['국산'],buying:3,rv:{q:'"아삭하고 시원해요. 비빔국수에 올리면 여름맛이에요"',a:'정*애 | 참좋은두레생협',s:5},rvData:null},
-
-  {name:'풀만먹인 양 숄더랙',sub:'320g',img:IMG+'58629C.jpg',dc:15,old:'17,000',now:'14,400',save:'2,600',
-   f1:'100% 풀만 먹인 양고기, 뼈째 뜯는 손맛과 깊은 풍미',f2:'오직 두레에서만! 특별한 날 홈파티 메인 요리로',
-   tags:['독점'],buying:1,rv:{q:'"뼈째 뜯어먹는 재미가 있어요. 아이들이 좋아해요"',a:'조*아 | 에코생협',s:5},rvData:null},
-
-  {name:'유기농아이스크림(바닐라)',sub:'유기인증 99%',img:IMG+'10985C.png',dc:10,old:'8,600',now:'7,700',save:'900',
-   f1:'유기 인증 99%, 신선한 원유 40% 이상 함유 아이스크림',f2:'여름 미리 준비! 아이 간식으로 안심하고 줄 수 있는',
-   tags:['유기농'],buying:1,rv:{q:'"시중 아이스크림과 다르게 우유맛이 진해요. 아이 간식으로 안심"',a:'황*현 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'메밀부침가루',sub:'500g',img:IMG+'20178C.jpg',dc:15,old:'6,000',now:'5,100',save:'900',
-   f1:'국산 재료에 메밀가루 15% 함유, 구수한 맛이 특징',f2:'봄나물전, 해물파전 부칠 때 바삭하게 잘 부쳐지는',
-   tags:['국산'],buying:1,rv:{q:'"봄나물전 부칠 때 바삭하게 잘 부쳐져요. 구수해요"',a:'이*진 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'발아들기름',sub:'300ml',img:IMG+'20710C.jpg',dc:15,old:'32,000',now:'27,200',save:'4,800',
-   f1:'압착공법으로 단일 추출, 발아 들깨 100% 사용',f2:'나물무침, 비빔밥에 한 숟갈 넣으면 고소함이 배가',
-   tags:['국산'],buying:2,rv:{q:'"고소함이 일반 들기름과 차원이 달라요. 나물에 꼭 써요"',a:'김*선 | 주민두레생협',s:5},rvData:null},
-
-  {name:'사골곰탕',sub:'냉동',img:IMG+'20316C.png',dc:20,old:'6,100',now:'4,900',save:'1,200',
-   f1:'첨가물 없이 전통방식으로 우려낸 진한 사골 국물',f2:'20% 할인! 냉동실에 쟁여두면 든든한 한 끼 해결',
-   tags:['무첨가'],buying:18,rv:{q:'"국물이 뽀얗고 진해서 매주 사서 먹어요"',a:'정*애 | 참좋은두레생협',s:5},
-   rvData:{score:'4.6',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',count:'42건',ai:'"진하고 고소하다"는 호평 압도적. 해장, 이유식 베이스로도 인기. 일부 "짠맛" 지적.',posC:'37건(88%)',negC:'5건(12%)',kw:[{t:'진한 국물',n:16,p:1},{t:'고소한',n:12,p:1},{t:'해장용',n:8,p:1},{t:'이유식',n:5,p:1},{t:'짠맛',n:3,p:0}],pos:[{t:'"국물이 뽀얗고 진해서 매주 사요. 아이도 잘 먹어요"',a:'정*애',d:'참좋은두레생협'},{t:'"해장으로 이만한 게 없어요. 간편하고 맛있습니다"',a:'김*윤',d:'두레생협연합회'}],neg:[{t:'"좀 짜게 느껴질 때가 있어요"',a:'이*현',d:'평택두레생협'}]}},
-
-  {name:'오이소박이',sub:'1kg',img:IMG+'28996C.jpg',dc:7,old:'10,200',now:'9,500',save:'700',
-   f1:'부추와 양파 넉넉히 넣어 만든 아삭한 오이소박이',f2:'콩국수, 냉면 곁들이로 여름 미리 준비하는 밑반찬',
-   tags:['국산'],buying:3,rv:{q:'"아삭하고 양념이 잘 배어있어요. 여름에 꼭 사요"',a:'유*선 | 춘천두레생협',s:5},rvData:null},
-
-  {name:'사골고기곰탕',sub:'냉동',img:IMG+'21051C.png',dc:20,old:'9,000',now:'7,200',save:'1,800',
-   f1:'전통방식으로 우려낸 국물에 두레축산 건강한 원료육',f2:'고기까지 든든하게, 한 팩이면 보양식 한 끼 완성',
-   tags:['국산'],buying:3,rv:{q:'"고기도 푸짐하고 국물도 진해서 한 끼로 충분해요"',a:'김*훈 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'한우사골곰탕',sub:'냉동',img:IMG+'39157C.jpg',dc:19,old:'7,200',now:'5,800',save:'1,400',
-   f1:'98°C에서 11시간 고아낸 뽀얀 국물, 2회 기름 제거',f2:'한우 사골의 깊은 맛, 쌀밥 말아 먹으면 꿀맛',
-   tags:['한우'],buying:7,rv:{q:'"뽀얀 국물이 정말 진해요. 밥 말아먹으면 꿀맛!"',a:'강*성 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'사골우족도가니탕',sub:'냉동',img:IMG+'21052C.png',dc:20,old:'8,700',now:'7,000',save:'1,700',
-   f1:'도가니, 스지, 우족을 한번에 넣어 전통방식으로 제조',f2:'쫄깃한 도가니와 진한 국물, 겨울이 아니어도 보양식',
-   tags:['국산'],buying:4,rv:{q:'"도가니가 쫄깃하고 국물이 걸쭉해서 너무 맛있어요"',a:'이*희 | 바른두레생협',s:5},rvData:null},
-
-  {name:'김치손만두',sub:'국산밀 만두피',img:IMG+'36723C.png',dc:9,old:'6,400',now:'5,800',save:'600',
-   f1:'칼칼한 김치와 쫄깃한 국산 밀 만두피의 만남',f2:'찜, 구이, 만두국까지 활용도 높은 냉동실 필수품',
-   tags:['국산밀'],buying:4,rv:{q:'"김치맛이 칼칼하니 맛있어요. 만두국으로 끓여먹어요"',a:'양*영 | 바른두레생협',s:5},rvData:null},
-
-  {name:'고기손만두',sub:'무항생제 돼지',img:IMG+'35418C.png',dc:9,old:'6,400',now:'5,800',save:'600',
-   f1:'무항생제 돼지고기와 국산 밀 만두피, 소가 꽉 찬',f2:'한 봉지 쟁여두면 간편한 한 끼, 아이 간식으로도 딱',
-   tags:['무항생제','국산밀'],buying:1,rv:{q:'"소가 꽉 차있어서 든든해요. 에어프라이어에 구워도 맛있어요"',a:'신*미 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'발아생들기름',sub:'160ml',img:IMG+'21390C.jpg',dc:15,old:'20,700',now:'17,600',save:'3,100',
-   f1:'특허 공법으로 3회 세척한 발아 들깨, 순수 압착',f2:'나물 무칠 때 한 방울이면 고소함의 차원이 다른',
-   tags:['국산'],buying:1,rv:{q:'"향이 진하고 고소해요. 나물 무칠 때 한 방울이면 충분"',a:'김*선 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'유기농콩기름',sub:'1000ml',img:IMG+'28853C.jpg',dc:8,old:'12,900',now:'11,900',save:'1,000',
-   f1:'NON-GMO 유기농 대두 사용, 유럽 유기인증',f2:'튀김, 볶음, 부침까지 매일 쓰는 안심 식용유',
-   tags:['유기농','NON-GMO'],buying:12,rv:{q:'"매일 쓰는 기름이라 유기농이라 안심이에요. 튀김도 깔끔"',a:'안*숙 | 에코생협',s:5},rvData:null},
-
-  {name:'발아볶은참깨',sub:'120g',img:IMG+'21180C.jpg',dc:20,old:'9,800',now:'7,800',save:'2,000',
-   f1:'국산 참깨를 5회 세척 후 발아, 맞춤 온도 로스팅',f2:'20% 할인! 나물에 솔솔, 비빔밥에 톡톡 뿌리면 고소함 UP',
-   tags:['국산'],buying:3,rv:{q:'"고소함이 진짜 달라요. 나물에 뿌리면 격이 달라져요"',a:'김*선 | 은평두레생협',s:5},rvData:null},
-
-  {name:'도라지절편세트',sub:'3년근 무농약',img:IMG+'29038C.png',dc:15,old:'34,500',now:'29,300',save:'5,200',
-   f1:'3년근 이상 국내산 무농약 도라지, 은은한 맛과 향',f2:'가정의달 건강 선물로 좋은, 정성 가득 절편 세트',
-   tags:['무농약','가정의달'],buying:0,rv:{q:'"선물용으로 포장이 예쁘고 정성이 느껴져요"',a:'이*희 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'보리물냉면',sub:'보리면 + 동치미육수',img:IMG+'30779C.jpg',dc:9,old:'6,500',now:'5,900',save:'600',
-   f1:'동치미 육수와 한우 육수의 감칠맛, 보리면 특유의 구수함',f2:'여름 미리 준비! 시원한 냉면 한 그릇으로 더위 탈출',
-   tags:['우리밀'],buying:2,rv:{q:'"보리면이 쫄깃하고 육수가 시원해요. 여름에 최고"',a:'최*덕 | 바른두레생협',s:5},rvData:null},
-
-  {name:'보리냉면사리',sub:'우리밀·보리',img:IMG+'31403C.jpg',dc:12,old:'1,700',now:'1,500',save:'200',
-   f1:'볶은 보리의 구수한 향, 우리밀로 만든 냉면 사리',f2:'냉면육수에 말아 시원하게, 비빔으로 매콤하게',
-   tags:['우리밀'],buying:0,rv:{q:'"면이 쫄깃하고 보리향이 구수해요. 비빔으로 먹어도 맛있어요"',a:'김*화 | 경기두레생협',s:4},rvData:null},
-
-  {name:'수제손질민어살',sub:'400g',img:IMG+'57975C.jpg',dc:30,old:'17,000',now:'11,900',save:'5,100',
-   f1:'수산물 창고방출! 손질된 민어살을 30% 대폭 할인',f2:'구이, 찜, 매운탕 어디에든 활용 가능한 프리미엄 수산물',
-   tags:['국산','창고방출'],buying:0,rv:{q:'"살이 통통하고 신선해요. 구이로 먹으면 담백해요"',a:'이*희 | 바른두레생협',s:5},rvData:null},
-
-  {name:'데친문어',sub:'700g / 1미',img:IMG+'58200C.jpg',dc:30,old:'53,200',now:'37,200',save:'16,000',
-   f1:'통문어 한 마리를 데쳐서 바로 먹을 수 있는 프리미엄',f2:'30% 대폭 할인! 초장에 찍어 특별한 날 안주로 딱',
-   tags:['국산','창고방출'],buying:0,rv:{q:'"크기가 넉넉하고 쫄깃해요. 초장에 찍으면 술안주로 최고"',a:'김*윤 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'무우',sub:'700g / 무농약',img:IMG+'39405C.jpg',dc:33,old:'2,400',now:'1,600',save:'800',
-   f1:'제주도 무농약 무우, 소비촉진 33% 대폭 할인',f2:'깍두기, 무생채, 국거리까지 만능 채소를 파격 가격에',
-   tags:['무농약','제주산'],buying:0,rv:{q:'"아삭하고 달아요. 깍두기 담갔더니 가족들이 좋아해요"',a:'정*미 | 경기남부두레생협',s:5},rvData:null},
-
-  {name:'포기김치',sub:'2kg / 국산',img:IMG+'32424C.jpg',dc:25,old:'16,500',now:'12,400',save:'4,100',
-   f1:'국산 배추와 양념으로 담근 전통 포기김치, 25% 할인',f2:'2kg이면 2인 가족 2주치, 냉장고에 늘 있어야 할 필수품',
-   tags:['국산'],buying:0,rv:{q:'"맛이 깔끔하고 잘 익어요. 우리 집 필수품이에요"',a:'서*지 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'발아참기름',sub:'300ml',img:IMG+'20708C.jpg',dc:15,old:'36,900',now:'31,400',save:'5,500',
-   f1:'국산 참깨를 발아시켜 맞춤 온도로 정성껏 볶아 짠',f2:'나물, 비빔밥, 볶음에 한 방울이면 풍미가 확 살아나는',
-   tags:['국산'],buying:0,rv:{q:'"향이 진하고 깊어요. 비빔밥에 넣으면 풍미가 확 달라져요"',a:'이*연 | 울림두레생협',s:5},rvData:null},
-
-  {name:'돌산갓김치',sub:'1kg / 국산',img:IMG+'59429C.jpg',dc:10,old:'10,000',now:'9,000',save:'1,000',
-   f1:'톡 쏘는 알싸함과 아삭한 돌산갓의 제철 김치',f2:'밥반찬은 물론 고기 쌈장 대신 곁들이면 개운한 맛',
-   tags:['국산','제철'],buying:4,rv:{q:'"알싸한 맛이 입맛을 확 돋워줘요. 봄에만 먹을 수 있어서 꼭 사요"',a:'박*정 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'풋마늘대김치',sub:'500g / 국산',img:IMG+'59420C.jpg',dc:10,old:'10,500',now:'9,500',save:'1,000',
-   f1:'제철 풋마늘의 향긋함과 알싸한 풍미가 살아있는 김치',f2:'봄에만 맛볼 수 있는 별미 김치, 고기와 함께 먹으면 최고',
-   tags:['국산','제철'],buying:4,rv:{q:'"풋마늘 향이 진해서 입맛 없을 때 딱이에요"',a:'정*미 | 경기남부두레생협',s:5},rvData:null},
-
-  {name:'(맛찬)달래무침',sub:'맛찬 / 봄 달래',img:IMG+'58946C.jpg',dc:0,old:'',now:'6,400',save:'',
-   f1:'봄 달래의 알싸한 향이 살아있는 간편한 밑반찬',f2:'밥에 쓱쓱 비벼먹으면 봄이 입안 가득',
-   tags:['맛찬','제철'],buying:2,rv:{q:'"달래향이 진하고 양념이 딱 좋아요. 밥도둑!"',a:'이*진 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'(맛찬)꼬막양념무침',sub:'맛찬',img:IMG+'59024C.jpg',dc:0,old:'',now:'8,800',save:'',
-   f1:'탱글탱글한 꼬막에 매콤새콤 양념을 무친 별미 반찬',f2:'술안주로도 밥반찬으로도 인기 만점',
-   tags:['맛찬'],buying:0,rv:{q:'"꼬막이 탱글하고 양념이 찰져요. 자꾸 손이 가요"',a:'오*영 | 에코생협',s:5},rvData:null},
-
-  {name:'(맛찬)오이뱃두리',sub:'맛찬 / 한우',img:IMG+'58028C.png',dc:0,old:'',now:'5,700',save:'',
-   f1:'아삭한 오이 속에 고소한 한우 소를 채운 별미 반찬',f2:'한 입 베어물면 오이 아삭함과 한우 감칠맛이 동시에',
-   tags:['맛찬','한우'],buying:1,rv:{q:'"한우가 들어있어서 고급스러워요. 손님상에 딱!"',a:'김*선 | 은평두레생협',s:5},rvData:null},
-
-  {name:'(맛찬)지리멸치볶음',sub:'맛찬',img:IMG+'58030C.png',dc:0,old:'',now:'4,200',save:'',
-   f1:'고소한 지리멸치를 짜지 않게 볶아낸 기본 밑반찬',f2:'도시락에 넣어도, 밥 위에 올려도 고소한 한 젓가락',
-   tags:['맛찬'],buying:1,rv:{q:'"짜지 않아서 아이도 잘 먹어요. 항상 냉장고에 넣어둬요"',a:'곽*영 | 고양파주두레생협',s:5},rvData:null},
-
-  {name:'(맛찬)생깻잎무침',sub:'맛찬',img:IMG+'58634C.jpg',dc:0,old:'',now:'6,100',save:'',
-   f1:'신선한 생깻잎을 새콤달콤하게 무친 향긋한 반찬',f2:'고기 먹을 때 곁들이면 느끼함을 잡아주는 깻잎향',
-   tags:['맛찬'],buying:2,rv:{q:'"깻잎향이 진하고 양념이 맛있어요. 삼겹살이랑 최고"',a:'심*영 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'(맛찬)감자채볶음',sub:'맛찬',img:IMG+'58636C.jpg',dc:0,old:'',now:'3,700',save:'',
-   f1:'얇게 채 썬 감자를 담백하게 볶아낸 깔끔한 반찬',f2:'아이부터 어른까지 누구나 좋아하는 기본 밑반찬',
-   tags:['맛찬'],buying:3,rv:{q:'"아삭하고 담백해서 질리지 않아요. 아이 도시락에 꼭 넣어요"',a:'최*경 | 경기두레생협',s:5},rvData:null},
-
-  {name:'프로바이오틱스',sub:'17종 유산균',img:IMG+'41515C.png',dc:35,old:'20,500',now:'13,300',save:'7,200',
-   f1:'17종 유산균, 하루 한 포로 간편하게 장 건강 관리',f2:'35% 최대 할인! 온 가족 건강 필수템',
-   tags:['건강기능식품'],buying:83,rv:{q:'"가족 모두 매일 챙겨 먹어요. 속이 편해졌어요"',a:'황*현 | 푸른두레생협',s:5},rvData:null},
-
-  {name:'루테인오메가3',sub:'눈+혈행+항산화',img:IMG+'42857C.jpg',dc:35,old:'22,600',now:'14,700',save:'7,900',
-   f1:'눈 건강, 혈행 개선, 항산화까지 한 번에',f2:'35% 할인! 컴퓨터·스마트폰 많이 보는 분께 추천',
-   tags:['건강기능식품'],buying:18,rv:{q:'"눈이 덜 피곤해진 느낌이에요. 할인할 때 꼭 사둬요"',a:'강*성 | 두레생협연합회',s:5},rvData:null},
-
-  {name:'비타민D 2200IU',sub:'채소분말+해조칼슘',img:IMG+'44787C.png',dc:35,old:'12,200',now:'7,900',save:'4,300',
-   f1:'하루 한 알로 비타민D 보충, 채소 분말과 해조 칼슘 함유',f2:'35% 할인! 실내 생활 많은 현대인 필수 영양제',
-   tags:['건강기능식품'],buying:19,rv:{q:'"작고 먹기 편해요. 온 가족이 하나씩 챙겨 먹습니다"',a:'김*화 | 경기두레생협',s:5},rvData:null},
-
-  {name:'야채가루',sub:'30스틱',img:IMG+'58287C.png',dc:35,old:'9,200',now:'6,000',save:'3,200',
-   f1:'대파·양파·표고·당근을 가루로, 스틱형 간편 조미료',f2:'35% 할인! 국·찌개에 한 봉지면 깊은 맛 완성',
-   tags:['국산'],buying:8,rv:{q:'"다시다 대신 써요. 천연 재료라 안심이고 맛도 좋아요"',a:'민*희 | 경기남부두레생협',s:5},rvData:null}
+  {
+    "name": "당근(1kg/무농약/쥬스용)",
+    "sub": "1kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/19563C.jpg",
+    "dc": 12,
+    "old": "3,200",
+    "now": "2,800",
+    "save": "400",
+    "f1": "영양 가득 주황빛 한 잔이 필요할 때!",
+    "f2": "다른 과채와 섞어서 주스로, 스프로 다양하게!",
+    "tags": [
+      "유기농"
+    ],
+    "buying": 1821,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "열무김치(1kg)",
+    "sub": "1kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/28224C.jpg",
+    "dc": 10,
+    "old": "7,000",
+    "now": "6,300",
+    "save": "700",
+    "f1": "국산 열무, 고춧가루, 양파, 대파 사용",
+    "f2": "새우젓, 멸치 액젓으로 간을 맞춰 한층 깔끔한 감칠맛!",
+    "tags": [
+      "할인"
+    ],
+    "buying": 1811,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "샐러리(500g/무농약)",
+    "sub": "500g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/33778C.jpg",
+    "dc": 11,
+    "old": "3,600",
+    "now": "3,200",
+    "save": "400",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 1336,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "알비트(1kg/무농약)",
+    "sub": "1kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/31221C.jpg",
+    "dc": 10,
+    "old": "5,000",
+    "now": "4,500",
+    "save": "500",
+    "f1": "비타민, 칼륨, 철 등 다양한 영양소 함유",
+    "f2": "화학농약·비료 없이 무농약으로 재배",
+    "tags": [
+      "할인"
+    ],
+    "buying": 480,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "대패오리(500g/냉동)",
+    "sub": "500g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/28445C.jpg",
+    "dc": 10,
+    "old": "11,900",
+    "now": "10,700",
+    "save": "1,200",
+    "f1": "무항생제 인증 오리를 얇게 정육, 부드러운 식감",
+    "f2": "야들야들하고 쫄깃한 식감에 고소하게 번지는 감칠맛",
+    "tags": [
+      "무항생제"
+    ],
+    "buying": 473,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "메밀국수",
+    "sub": "400g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/39667C.jpg",
+    "dc": 8,
+    "old": "4,500",
+    "now": "4,100",
+    "save": "400",
+    "f1": "구례에서 생산한 우리밀 밀가루와 메밀가루, 천일염만으로만 만들었어요.",
+    "f2": "진공반죽으로 생산하여 더욱 쫄깃한 맛",
+    "tags": [
+      "할인"
+    ],
+    "buying": 372,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "7곡 미숫가루",
+    "sub": "1kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/39867C.jpg",
+    "dc": 19,
+    "old": "15,500",
+    "now": "12,500",
+    "save": "3,000",
+    "f1": "100% 국산 친환경 7곡물로 전하는 고소한 영양",
+    "f2": "발아 과정 중 3회 이상 세척하여 더욱 깨끗!",
+    "tags": [
+      "할인"
+    ],
+    "buying": 90,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "신고배(1.7kg/소과)",
+    "sub": "1.7kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/24506C.jpg",
+    "dc": 0,
+    "old": "",
+    "now": "9,300",
+    "save": "",
+    "f1": "크기는 작아도 맛은 그대로, 의성 신고배 입니다.",
+    "f2": "신고배와 함께 환절기 호흡기 건강을 지키세요",
+    "tags": [
+      "할인"
+    ],
+    "buying": 52,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "토종닭(1.4kg/냉동)",
+    "sub": "1.4kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56259C.jpg",
+    "dc": 30,
+    "old": "15,900",
+    "now": "11,000",
+    "save": "4,900",
+    "f1": "일반 닭과는 다른 풍부한 고소함과 쫄깃한 식감.",
+    "f2": "90일 이상 키운 전통 토종닭, 씹는 맛이 살아있어요!",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "그레인 시카 크림",
+    "sub": "50g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/48520C.jpg",
+    "dc": 30,
+    "old": "21,700",
+    "now": "15,200",
+    "save": "6,500",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "한마리 삼계탕",
+    "sub": "900g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/54729C.jpg",
+    "dc": 21,
+    "old": "14,000",
+    "now": "11,000",
+    "save": "3,000",
+    "f1": "국산 무항생제 닭 한마리를 통째로 넣어 만든 두레생협 삼계탕",
+    "f2": "수삼, 한방재료로 푹 고아 낸 진하고 담백한 맛",
+    "tags": [
+      "무항생제"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "유기농 귀리유(YOU)16팩",
+    "sub": "190ml×16팩",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/57232C.jpg",
+    "dc": 20,
+    "old": "19,200",
+    "now": "15,300",
+    "save": "3,900",
+    "f1": "100% 국산 유기농 통귀리로 속 편한 식물성 음료",
+    "f2": "식혜 제조 원리 자연 발효로 만든 건강한 단맛",
+    "tags": [
+      "유기농"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "택배 유기농 귀리유(YOU)(16팩x4개)",
+    "sub": "16팩x4개",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/57485C.jpg",
+    "dc": 20,
+    "old": "76,800",
+    "now": "61,200",
+    "save": "15,600",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "검정찰보리(800g/유기)",
+    "sub": "800g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/17324C.jpg",
+    "dc": 20,
+    "old": "9,400",
+    "now": "7,500",
+    "save": "1,900",
+    "f1": "입안에서 톡톡! 구수한 검정찰보리 파격 할인",
+    "f2": "블랙푸드의 힘! 800g 한 봉지면 한 달 내내 구수한 수제 보리차 완성",
+    "tags": [
+      "추천"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "백김치(국산/2kg)",
+    "sub": "2kg",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/58219C.jpg",
+    "dc": 20,
+    "old": "14,500",
+    "now": "11,600",
+    "save": "2,900",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "가자미구이(80g)",
+    "sub": "80g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56866C.jpg",
+    "dc": 16,
+    "old": "4,300",
+    "now": "3,600",
+    "save": "700",
+    "f1": "전자레인지 2분! 간편하게 즐기는 가자미구이",
+    "f2": "제철 가자미를 손질하여 녹차 염지 후 초벌구이",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "쌀보리강정",
+    "sub": "150g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/53934C.jpg",
+    "dc": 16,
+    "old": "6,200",
+    "now": "5,200",
+    "save": "1,000",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "단백질쉐이크",
+    "sub": "300g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/54198C.jpg",
+    "dc": 15,
+    "old": "13,500",
+    "now": "11,400",
+    "save": "2,100",
+    "f1": "1.조합원분들의 의견으로 새롭게 태어났습니다.",
+    "f2": "설탕은 빼고 단백질은 올려 더욱 건강하게!",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "고등어구이(90g)",
+    "sub": "90g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/55747C.jpg",
+    "dc": 15,
+    "old": "3,200",
+    "now": "2,700",
+    "save": "500",
+    "f1": "전자레인지 2분! 간편하게 즐기는 고등어구이",
+    "f2": "제철 고등어를 손질하여 녹차 염지 후 초벌구이",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "베이스 선크림",
+    "sub": "40g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/59362C.jpg",
+    "dc": 15,
+    "old": "13,500",
+    "now": "11,400",
+    "save": "2,100",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "신규출시"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "삼치구이(90g)",
+    "sub": "90g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/55748C.jpg",
+    "dc": 15,
+    "old": "3,900",
+    "now": "3,300",
+    "save": "600",
+    "f1": "전자레인지 2분! 간편하게 즐기는 제철 삼치구이",
+    "f2": "제철 삼치를 솔질하여 녹차염지 후 초벌구이 하였어요.",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "그레인 남성올인원",
+    "sub": "120ml",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/58210C.jpg",
+    "dc": 15,
+    "old": "13,700",
+    "now": "11,600",
+    "save": "2,100",
+    "f1": "3콤보 콤플렉스로 진정·보습·모공을 한 번에 케어가능",
+    "f2": "피부자극테스트완료, 미백·주름개선 2중 기능성 화장품",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "유기농 매실스틱(20mlx15개)",
+    "sub": "20ml x 15개입",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/58781C.jpg",
+    "dc": 15,
+    "old": "10,500",
+    "now": "8,900",
+    "save": "1,600",
+    "f1": "유기농 매실 60%, 유기농 설탕 40%를 사용하여 100% 유기농 입니다.",
+    "f2": "전통항아리 숙성으로 매실풍미와 깔끔한 맛이 특징입니다.",
+    "tags": [
+      "유기농"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "유기농 레몬즙(20ml*14포)",
+    "sub": "20ml*14포",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56139C.jpg",
+    "dc": 15,
+    "old": "9,900",
+    "now": "8,400",
+    "save": "1,500",
+    "f1": "NFC 착즙 무첨가 레몬즙 100%",
+    "f2": "1포에 유기농 유기농 레몬 1개가 통째로!",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "올리브유 스틱",
+    "sub": "10ml*14포",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/57926C.jpg",
+    "dc": 15,
+    "old": "9,900",
+    "now": "8,400",
+    "save": "1,500",
+    "f1": "100% 프리미엄 유기농 엑스트라버진 올리브유",
+    "f2": "개별스틱포장으로 처음처럼 언제든 신선하게!",
+    "tags": [
+      "유기농"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "화이트닝 비타앰플",
+    "sub": "30ml",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/53663C.jpg",
+    "dc": 15,
+    "old": "14,500",
+    "now": "12,300",
+    "save": "2,200",
+    "f1": "생기 넘치는 비타민과 미백 기능성 원료가 피부를 밝게!",
+    "f2": "오일감없이 산뜻하고 촉촉한 제형으로 피부톤을 개선해요.",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "동물복지 다짐육(300g/뒷다리살)",
+    "sub": "300g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56910C.jpg",
+    "dc": 15,
+    "old": "6,000",
+    "now": "5,100",
+    "save": "900",
+    "f1": "방목장에서 자유롭게 뛰놀며 자란 돼지 뒷다리살(다짐육)",
+    "f2": "국내 최초 저탄소, 동물복지, 무항생제 인증 돈육이에요",
+    "tags": [
+      "동물복지"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "동물복지 카레용(300g/뒷다리살)",
+    "sub": "300g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/56911C.jpg",
+    "dc": 15,
+    "old": "6,000",
+    "now": "5,100",
+    "save": "900",
+    "f1": "방목장에서 자유롭게 뛰놀며 자란 돼지 뒷다리살(카레용)",
+    "f2": "국내 최초 저탄소, 동물복지, 무항생제 인증 돈육이에요",
+    "tags": [
+      "동물복지"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "손질 참가자미(600g/2~3미)",
+    "sub": "600g/3~4미",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/58197C.jpg",
+    "dc": 15,
+    "old": "14,000",
+    "now": "11,900",
+    "save": "2,100",
+    "f1": "국내 남해안에서 어획한 가자미를 먹기 좋게 손질 후 포장",
+    "f2": "품질인증과 수산물이력제를 통해 안심하고 먹을 수 있는 안심수산물",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  },
+  {
+    "name": "쌀강정",
+    "sub": "150g",
+    "img": "https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage/53932C.jpg",
+    "dc": 15,
+    "old": "6,000",
+    "now": "5,100",
+    "save": "900",
+    "f1": "",
+    "f2": "",
+    "tags": [
+      "할인"
+    ],
+    "buying": 0,
+    "rv": null,
+    "rvData": null
+  }
 ];
+
+// ======== IMAGE FALLBACK ========
+function imgFallback(el){
+  var src = el.src;
+  if(src.endsWith('.jpg')){
+    el.src = src.replace(/\.jpg$/,'.png');
+  } else if(src.endsWith('.png')){
+    el.src = src.replace(/\.png$/,'.jpeg');
+  } else {
+    el.style.display='none';
+  }
+}
 
 // ======== RENDER SLIDES ========
 (function(){
@@ -688,11 +931,14 @@ var products = [
   products.forEach(function(p, i){
     var slide = document.createElement('div');
     slide.className = 'slide';
+    var rank = i + 1;
+    var rankClass = rank <= 3 ? ' rank-'+rank : '';
+    var rankHTML = '<div class="rank-badge'+rankClass+'"><span class="rank-num">'+rank+'</span><span class="rank-label">인기 '+(rank<=3?'TOP ':'')+'상품</span></div>';
     var dcHTML = p.dc > 0 ? '<div class="dc-badge">'+p.dc+'%</div>' : '';
     var tagsHTML = p.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
-    var buyHTML = p.buying > 0 ? '<div class="buying"><span class="dot-live"></span> '+p.buying+'개 구매중</div>' : '';
+    var buyHTML = p.buying > 0 ? '<div class="buying"><span class="dot-live"></span> '+p.buying+'명 주문중</div>' : '';
     var weekBadge = p.dc > 0 ? '<div class="week-only-badge">이번 주만 이 가격</div>' : '';
-    var buyCountHTML = p.buying > 0 ? '<div class="p-detail" style="color:var(--green);font-weight:600;margin-top:6px;">&#128722; 현재 '+p.buying+'개 구매중</div>' : '';
+    var buyCountHTML = p.buying > 0 ? '<div class="p-detail" style="color:var(--green);font-weight:600;margin-top:6px;">&#128722; 이번 달 '+p.buying+'명 주문</div>' : '';
     var oldHTML = p.old ? '<span class="p-old">'+p.old+'원</span>' : '';
     var saveHTML = p.save ? '<span class="p-save">'+p.save+'원 절약</span>' : '';
     var rvBoxHTML = '';
@@ -707,8 +953,9 @@ var products = [
 
     slide.innerHTML =
       '<div class="prod-slide">'+
+        rankHTML+
         '<div class="img-area">'+
-          '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy">'+
+          '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="imgFallback(this)">'+
           dcHTML+
           '<div class="tag-area">'+tagsHTML+'</div>'+
           buyHTML+weekBadge+
@@ -733,6 +980,9 @@ var products = [
       '</div>';
     track.appendChild(slide);
   });
+
+  // Update page indicator total
+  document.getElementById('pageInd').textContent = '1 / ' + (products.length + 1);
 })();
 
 // ======== GUIDE OVERLAY ========
@@ -744,61 +994,60 @@ var products = [
   setTimeout(dismiss, 3000);
 })();
 
-// ======== SWIPER (가로) ========
+// ======== SWIPER ========
 (function(){
   var track = document.getElementById('track');
   var ind = document.getElementById('pageInd');
   var total = products.length + 1;
-  var current = 0, startX = 0, diffX = 0, dragging = false, isHoriz = null;
+  var current = 0, startY = 0, diffY = 0, dragging = false, isVertical = null;
   var animating = false;
-
-  function slideW(){ return Math.min(480, window.innerWidth); }
 
   function goTo(i){
     if(animating) return;
     current = Math.max(0, Math.min(total-1, i));
     track.style.transition = 'transform 0.4s cubic-bezier(0.22,0.68,0,1)';
-    track.style.transform = 'translateX(' + (-current * slideW()) + 'px)';
+    track.style.transform = 'translateY(' + (-current * 100) + 'dvh)';
     ind.textContent = (current+1)+' / '+total;
+    var pf=document.getElementById('progressFill');
+    if(pf) pf.style.width = (current/(total-1)*100)+'%';
     animating = true;
     setTimeout(function(){ animating=false; },420);
   }
 
   track.addEventListener('touchstart',function(e){
     if(animating)return;
-    startX=e.touches[0].clientX;
-    diffX=0; dragging=true; isHoriz=null;
+    startY=e.touches[0].clientY;
+    diffY=0; dragging=true; isVertical=null;
     track.style.transition='none';
   },{passive:true});
 
   track.addEventListener('touchmove',function(e){
     if(!dragging||animating)return;
-    var dx = e.touches[0].clientX - startX;
-    var dy = e.touches[0].clientY - startX;
-    if(isHoriz===null){
-      var absDx = Math.abs(dx);
-      var absDy = Math.abs(e.touches[0].clientY - e.touches[0].clientY);
-      if(absDx>8){ isHoriz=true; }
-      else return;
+    var dy = e.touches[0].clientY - startY;
+    if(isVertical===null){
+      var absDy = Math.abs(dy);
+      var absDx = Math.abs(e.touches[0].clientX - startY);
+      if(absDy>8){ isVertical=true; }
+      else if(absDx>8){ isVertical=false; return; }
+      return;
     }
-    if(!isHoriz) return;
+    if(!isVertical) return;
     e.preventDefault();
-    diffX = dx;
-    var w = slideW();
+    diffY = dy;
     var offset;
-    if((current===0 && diffX>0)||(current===total-1 && diffX<0)){
-      offset = -current * w + diffX*0.3;
+    if((current===0 && diffY>0)||(current===total-1 && diffY<0)){
+      offset = -current * window.innerHeight + diffY*0.3;
     } else {
-      offset = -current * w + diffX;
+      offset = -current * window.innerHeight + diffY;
     }
-    track.style.transform = 'translateX('+offset+'px)';
+    track.style.transform = 'translateY('+offset+'px)';
   },{passive:false});
 
   track.addEventListener('touchend',function(){
     if(!dragging)return; dragging=false;
-    if(isHoriz && Math.abs(diffX)>50) goTo(diffX<0?current+1:current-1);
+    if(isVertical && Math.abs(diffY)>50) goTo(diffY<0?current+1:current-1);
     else goTo(current);
-    diffX=0;
+    diffY=0;
   });
 
   // Mouse wheel
@@ -808,24 +1057,19 @@ var products = [
     if(animating)return;
     if(wheelTimer)return;
     wheelTimer=setTimeout(function(){wheelTimer=null;},500);
-    if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){
-      if(e.deltaX>30) goTo(current+1);
-      else if(e.deltaX<-30) goTo(current-1);
-    } else {
-      if(e.deltaY>30) goTo(current+1);
-      else if(e.deltaY<-30) goTo(current-1);
-    }
+    if(e.deltaY>30) goTo(current+1);
+    else if(e.deltaY<-30) goTo(current-1);
   },{passive:false});
 
   // Mouse drag
-  var mouseDown=false,mStartX=0,mDiff=0;
+  var mouseDown=false,mStartY=0,mDiff=0;
   track.addEventListener('mousedown',function(e){
-    if(animating)return; mouseDown=true; mStartX=e.clientX; mDiff=0;
+    if(animating)return; mouseDown=true; mStartY=e.clientY; mDiff=0;
     track.style.transition='none'; e.preventDefault();
   });
   document.addEventListener('mousemove',function(e){
-    if(!mouseDown)return; mDiff=e.clientX-mStartX;
-    track.style.transform='translateX('+(-current*slideW()+mDiff)+'px)';
+    if(!mouseDown)return; mDiff=e.clientY-mStartY;
+    track.style.transform='translateY('+(-current*window.innerHeight+mDiff)+'px)';
   });
   document.addEventListener('mouseup',function(){
     if(!mouseDown)return; mouseDown=false;
@@ -835,19 +1079,16 @@ var products = [
 
   // Keyboard
   document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(current+1);}
-    if(e.key==='ArrowLeft'){e.preventDefault();goTo(current-1);}
+    if(e.key==='ArrowDown'||e.key===' '){e.preventDefault();goTo(current+1);}
+    if(e.key==='ArrowUp'){e.preventDefault();goTo(current-1);}
   });
 
   // Prevent link click on swipe
   track.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click',function(e){
-      if(Math.abs(diffX)>10||Math.abs(mDiff)>10) e.preventDefault();
+      if(Math.abs(diffY)>10||Math.abs(mDiff)>10) e.preventDefault();
     });
   });
-
-  // Resize fix
-  window.addEventListener('resize',function(){ goTo(current); });
 })();
 
 // ======== BOTTOM SHEET ========
@@ -890,6 +1131,15 @@ document.getElementById('sheetOverlay').addEventListener('click',closeSheet);
   sh.addEventListener('touchmove',function(e){if(!sY)return;dy=e.touches[0].clientY-sY;if(dy>0)sh.style.transform='translateX(-50%) translateY('+dy+'px)';},{passive:true});
   sh.addEventListener('touchend',function(){if(dy>100)closeSheet();sh.style.transform='';sY=0;dy=0;});
 })();
+
+// ======== FONT SIZE ========
+function cSz(s){
+  document.documentElement.style.fontSize=(16*s)+'px';
+  document.querySelectorAll('.font-ctrl button').forEach(function(b){b.classList.remove('on');});
+  if(s<1) document.getElementById('cf1').classList.add('on');
+  else if(s>1) document.getElementById('cf3').classList.add('on');
+  else document.getElementById('cf2').classList.add('on');
+}
 </script>
 
 </body>
