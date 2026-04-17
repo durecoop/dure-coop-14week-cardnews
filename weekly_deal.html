@@ -157,7 +157,10 @@
   }
   .prod-slide .price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
   .prod-slide .p-old{font-size:15px;color:#ccc;text-decoration:line-through;}
-  .prod-slide .p-now{font-size:clamp(28px,8vw,36px);font-weight:900;color:var(--red);letter-spacing:-1px;}
+  .prod-slide .p-now{font-size:clamp(32px,9vw,40px);font-weight:900;color:var(--red);letter-spacing:-1px;}
+  /* img placeholder (이미지 로드 실패 시) */
+  .img-placeholder{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f5f5 0%,#ececec 100%);padding:24px;text-align:center;}
+  .img-placeholder .ph-label{font-size:clamp(18px,5vw,26px);font-weight:800;color:#888;line-height:1.35;letter-spacing:-0.5px;word-break:keep-all;}
   .prod-slide .p-won{font-size:17px;font-weight:700;color:var(--red);}
   .prod-slide .p-save{
     display:inline-block;background:var(--red-bg);color:var(--red);
@@ -402,7 +405,7 @@
 <script>
 // ======== PRODUCT DATA ========
 var IMG = 'https://dureimg.ecoop.or.kr:9091/Delsys/DLOG/Goods/GoodsMaster/GoodsImage';
-var LINK = 'https://www.ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=2017';
+var LINK = 'https://www.ecoop.or.kr/DureShop/plan/planView.do?returnTypeGb=plan&returnNo=1707';
 
 var products = [
   {
@@ -917,15 +920,29 @@ var products = [
   }
 ];
 
-// ======== IMAGE FALLBACK ========
+// ======== IMAGE FALLBACK (체인: C.jpg → .jpg → .png → placeholder) ========
 function imgFallback(el){
+  el.onerror = null; // 무한 루프 방지
   var src = el.src;
-  if(src.endsWith('.jpg')){
-    el.src = src.replace(/\.jpg$/,'.png');
-  } else if(src.endsWith('.png')){
-    el.src = src.replace(/\.png$/,'.jpeg');
+  var step = parseInt(el.dataset.fbStep || '0', 10);
+  if(step === 0 && /C\.jpg$/.test(src)){
+    el.dataset.fbStep = '1';
+    el.onerror = function(){ imgFallback(el); };
+    el.src = src.replace(/C\.jpg$/, '.jpg');
+  } else if(step <= 1 && /\.jpg$/.test(src)){
+    el.dataset.fbStep = '2';
+    el.onerror = function(){ imgFallback(el); };
+    el.src = src.replace(/\.jpg$/, '.png');
   } else {
-    el.style.display='none';
+    // 최종 실패: placeholder — 상품명 텍스트로 빈 박스 방지
+    var name = el.getAttribute('alt') || '';
+    var holder = el.parentElement;
+    if(holder){
+      holder.classList.add('img-placeholder');
+      holder.innerHTML = '<div class="ph-label">' + name + '</div>';
+    } else {
+      el.style.display = 'none';
+    }
   }
 }
 
